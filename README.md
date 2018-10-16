@@ -1,4 +1,4 @@
-#Trabalho 1 de Métodos Numéricos
+# Trabalho 1 de Métodos Numéricos
 
 ## Equipe
 
@@ -8,7 +8,7 @@
  
 
 
-##Especificações
+## Especificações
 
 O deslocamento da extremidade de um foguete espacial ao entrar na atmosfera da terra é dado pela equação f(d) = a*d – d*ln(d), onde d é
 o deslocamento medido em cm e a é um parâmetro de ajuste para que se projete um foguete com a máxima segurança e eficiência
