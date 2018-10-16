@@ -16,10 +16,10 @@ possível. Caso esse deslocamento passe dos 2 cm esse foguete irá explodir, cau
 e simulações são feitos de modo a garantir que o foguete seja desenvolvido com toda segurança possível. Desenvolva um sistema para
 calcular esse deslocamento d da extremidade de um foguete espacial considerado com todos os requisitos apresentados nos itens abaixo:
 
-**Implementar algoritmo para calcular d pelo método da Bisseção.**
-**Implementar algoritmo para calcular d pelo método da Posição Falsa.**
-**Implementar algoritmo para calcular d pelo método de Newton-Raphson.**
-**Calibrar o sistema usando como padrão a = 1, isolamento = (2, 3) e \phi = 10-5.**
-**Fornecer um quadro resposta, variando os valores de a para vários foguetes.**
-**Fornecer um quadro comparativo, com isolamento, raízes e dados para cada método.**
-**Analisar o efeito da variação do valor de a de cada foguete, para cada método dado.**
+- **Implementar algoritmo para calcular d pelo método da Bisseção.**
+- **Implementar algoritmo para calcular d pelo método da Posição Falsa.**
+- **Implementar algoritmo para calcular d pelo método de Newton-Raphson.**
+- **Calibrar o sistema usando como padrão a = 1, isolamento = (2, 3) e \phi = 10-5.**
+- **Fornecer um quadro resposta, variando os valores de a para vários foguetes.**
+- **Fornecer um quadro comparativo, com isolamento, raízes e dados para cada método.**
+- **Analisar o efeito da variação do valor de a de cada foguete, para cada método dado.**
