@@ -6,8 +6,7 @@
  - Matheus Sousa Correia [@Lukiam23](https://github.com/Lukiam23)
  - Samir Braga Chaves [@samirbraga](https://github.com/samirbraga)
  - Tibet Teixeira[@tibet-teixeira](https://github.com/tibet-teixeira)
- 
-
+ - Franklyn Seabra [@Franklyn-S](https://github.com/Franklyn-S)
 
 ## Especificações
 
