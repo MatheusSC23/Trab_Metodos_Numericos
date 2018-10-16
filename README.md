@@ -5,6 +5,7 @@
  - Francisco San Diego de Sousa Castilho [@SanDiegoCastilho](https://github.com/SanDiegoCastilho)
  - Matheus Sousa Correia [@Lukiam23](https://github.com/Lukiam23)
  - Samir Braga Chaves [@samirbraga](https://github.com/samirbraga)
+ - Tibet Teixeira[@tibet-teixeira](https://github.com/tibet-teixeira)
  
 
 
