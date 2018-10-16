@@ -1,5 +1,13 @@
 #Trabalho 1 de Métodos Numéricos
 
+## Equipe
+
+ - Francisco San Diego de Sousa Castilho [@SanDiegoCastilho](https://github.com/SanDiegoCastilho)
+ - Matheus Sousa Correia [@Lukiam23](https://github.com/Lukiam23)
+ - Samir Braga Chaves [@samirbraga](https://github.com/samirbraga)
+ 
+
+
 ##Especificações
 
 O deslocamento da extremidade de um foguete espacial ao entrar na atmosfera da terra é dado pela equação f(d) = a*d – d*ln(d), onde d é
