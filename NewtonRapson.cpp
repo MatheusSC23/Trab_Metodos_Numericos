@@ -2,25 +2,20 @@
 #include <cmath>
 using namespace std;
 
-
-
 double f (double d) {
-	/*d é o deslocamento medido em cm e 
-	a é um parâmetro de ajuste para que se projete um foguete com a máxima segurança e eficiência possível
-	*/
-	double a = 1.0; //Usuario passa o a tbm?
-	return a*d-d*log(d); //Logaritmo 
+	/* d é o deslocamento medido em cm e 
+	 * a é um parâmetro de ajuste para que se projete um foguete com a máxima segurança e eficiência possível
+	 */
+	return a * d - d * log(d);
 }
 
-//terminar derivada
-/*
-double fLine(double x){
-	double a = 1.0; //Usuario passa o a tbm?
-	return 
+
+double fLine(double d){
+	return a - log(d) - 1;
 }
-*/
-double phi(double x){
-	return x-(f(x)/fLine(x));
+
+double phi(double d){
+	return d - (f(d) / fLine(d));
 }
 
 
@@ -32,6 +27,7 @@ double NewtonRapson(double (*f)(double), double (*phi)(double), double x0, doubl
 	int k = 1;
 	double x1;
 	double fx1;
+
 	//cabeçalho
 	cout.precision(4);
 	cout << fixed;
@@ -68,7 +64,7 @@ double NewtonRapson(double (*f)(double), double (*phi)(double), double x0, doubl
 
 int main()
 {
-	double raiz = NewtonRapson(f, phi, 0.5, 5*pow(10,-4), 5*pow(10,-4), 20);
+	double raiz = NewtonRapson(f, phi, 0.5, 5*pow(10,-4), 5 * pow(10,-4), 20);
 	cout << raiz << endl;
 	return 0;
 }
