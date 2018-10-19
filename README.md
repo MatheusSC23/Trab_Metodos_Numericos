@@ -20,5 +20,7 @@ O deslocamento da extremidade de um foguete espacial ao entrar na atmosfera da t
 - **Fornecer um quadro comparativo, com isolamento, raízes e dados para cada método.**
 - **Analisar o efeito da variação do valor de a de cada foguete, para cada método dado.**
 
+
 **Dados de entrada:** n (número de foguetes), a (de cada foguete) e &epsilon; (precisão).
+
 **Dados de saída:** quadros resposta (com d, E<sub>A</sub> para cada foguete e método) e comparativo.
