@@ -15,7 +15,7 @@ O deslocamento da extremidade de um foguete espacial ao entrar na atmosfera da t
 - **Implementar algoritmo para calcular d pelo método da Bisseção.**
 - **Implementar algoritmo para calcular d pelo método da Posição Falsa.**
 - **Implementar algoritmo para calcular d pelo método de Newton-Raphson.**
-- **Calibrar o sistema usando como padrão a = 1, isolamento = (2, 3) e \epsilon E = 10-5.**
+- **Calibrar o sistema usando como padrão a = 1, isolamento = (2, 3) e &epsilon; = 10-5.**
 - **Fornecer um quadro resposta, variando os valores de a para vários foguetes.**
 - **Fornecer um quadro comparativo, com isolamento, raízes e dados para cada método.**
 - **Analisar o efeito da variação do valor de a de cada foguete, para cada método dado.**
