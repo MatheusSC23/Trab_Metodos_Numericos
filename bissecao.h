@@ -19,13 +19,11 @@ int* isolamento (double a) {
 	return intervalo;
 }
 
-double bissecao (double parametroAjuste, double e) {
+double bissecao (double parametroAjuste, double e, int maxInter) {
 	int* intervalo = isolamento(parametroAjuste);
 
 	float a = intervalo[0];
 	float b = intervalo[1];
-
-	cout << a << " | " << b << endl;
 
 	if (b - a < e) return a;
 
