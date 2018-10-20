@@ -12,13 +12,11 @@ double f (double d) {
 	return a*d-d*log(d); //Logaritmo 
 }
 
-//terminar derivada
-/*
 double fLine(double x){
-	double a = 1.0; //Usuario passa o a tbm?
-	return 
+	double a = 1.0;
+	return a-d*(1/d)+log(d)
 }
-*/
+
 double phi(double x){
 	return x-(f(x)/fLine(x));
 }

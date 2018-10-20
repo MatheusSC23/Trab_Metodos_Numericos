@@ -14,7 +14,7 @@ double f (double d){
 
 
 double bissecao(double (*f)(double), double a, double b, double e, int maxInter){
-	if (b-a < e){
+	if (abs(b-a) < e){
 		return a;
 	}
 	int k = 0;
