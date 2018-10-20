@@ -1,73 +1,96 @@
+#ifndef NEWTONRAPSON_H
+#define NEWTONRAPSON_H
+
 #include <iostream>
 #include <cmath>
+
 using namespace std;
 
-double f (double d) {
+class NewtonRapson {
+
+private:
+	double parametroAjuste;
+	double x0;
+	double e;
+	int maxIter;
+
+public:
+	NewtonRapson (double ajuste, double erro, double iteracoes) {
+		parametroAjuste = ajuste;
+		e = erro;
+		maxIter = iteracoes;
+	}
+
 	/* d é o deslocamento medido em cm e 
 	 * a é um parâmetro de ajuste para que se projete um foguete com a máxima segurança e eficiência possível
 	 */
-	return a * d - d * log(d);
-}
-
-
-double fLine(double d){
-	return a - log(d) - 1;
-}
-
-double phi(double d){
-	return d - (f(d) / fLine(d));
-}
-
-
-double NewtonRapson(double (*f)(double), double (*phi)(double), double x0, double e1, double e2, int maxInter){
-	double fx0 = (*f)(x0);
-	if(abs(fx0) < e1) {
-		return x0;
+	double f (double d, double a) {
+		return a * d - d * log(d);
 	}
-	int k = 1;
-	double x1;
-	double fx1;
 
-	//cabeçalho
-	cout.precision(4);
-	cout << fixed;
-	cout << "k" << " | ";
-	cout << "   x  " << " | ";
-	cout << "f(x)  " << "  | ";
-	cout << "f'(x)" << endl;
 
-	cout << 0 << " | ";
-	cout << x0 << " | ";
-	cout << fx0 << "  | ";
-	cout << fLine(x0) <<endl;
+	double fLine(double d, double a){
+		return a - log(d) - 1;
+	}
 
-	while(k < maxInter){
-		x1 = (*phi)(x0);
-		fx1 = (*f)(x1);
-		//prints
-		cout << k << " | ";
-		cout << x1 << " | ";
-		cout << fx1 << " | ";
-		cout << fLine(x1) <<endl;
+	double phi(double d, double a){
+		return d - (f(d, a) / fLine(d, a));
+	}
 
-		if (abs(x1-x0) < e2 or abs(fx1) < e1 ){
-			return x1;
+
+	void pontoInicial (double a) {
+		this->x0 = exp(a) + 0.5;
+	}
+
+
+	double newton_rapson () {
+		pontoInicial(this->parametroAjuste);
+
+		double x0 = this->x0;
+		double parametroAjuste = this->parametroAjuste;
+		double e = this->e;
+		int maxIter = this->maxIter;
+
+		double fx0 = f(x0, parametroAjuste);
+
+		if(abs(fx0) < e) return x0;
+
+		int k = 1;
+		double x1;
+		double fx1;
+
+		//cabeçalho
+		cout.precision(6);
+		cout << fixed;
+		cout << "k" << " | ";
+		cout << "   x  " << " | ";
+		cout << "f(x)  " << "  | ";
+		cout << "f'(x)" << endl;
+
+		cout << 0 << " | ";
+		cout << x0 << " | ";
+		cout << fx0 << "  | ";
+		cout << fLine(x0, parametroAjuste) <<endl;
+
+		while(k < maxIter){
+			x1 = phi(x0, parametroAjuste);
+			fx1 = f(x1, parametroAjuste);
+
+			//prints
+			cout << k << " | ";
+			cout << x1 << " | ";
+			cout << fx1 << " | ";
+			cout << fLine(x1, parametroAjuste) <<endl;
+
+			if (abs(x1 - x0) < e or abs(fx1) < e ){
+				return x1;
+			}
+
+			x0 = x1;
+			k += 1;
 		}
 
-		x0 = x1;
-		k++;
+		return x1;
 	}
-
-	return x1;
-}
-
-
-/*
-int main()
-{
-	double raiz = NewtonRapson(f, phi, 0.5, 5*pow(10,-4), 5 * pow(10,-4), 20);
-	cout << raiz << endl;
-	return 0;
-}
-
- */
+};
+#endif
