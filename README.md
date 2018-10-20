@@ -2,12 +2,12 @@
 
 ## Equipe
 
- - Francisco San Diego de Sousa Castilho [@SanDiegoCastilho](https://github.com/SanDiegoCastilho)
- - Matheus Sousa Correia [@Lukiam23](https://github.com/Lukiam23)
- - Samir Braga Chaves [@samirbraga](https://github.com/samirbraga)
- - Tibet Teixeira [@tibet-teixeira](https://github.com/tibet-teixeira)
- - Franklyn Seabra [@Franklyn-S](https://github.com/Franklyn-S)
- - Daniel de Queiroz [@dqrtec](https://github.com/dqrtec)
+- **[@SanDiegoCastilho](https://github.com/SanDiegoCastilho) - Métodos, Slide, Lider**
+- **[@Lukiam23](https://github.com/Lukiam23) - Métodos, Diagrama de Classes**
+- **[@samirbraga](https://github.com/samirbraga) - Métodos**
+- **[@tibet-teixeira](https://github.com/tibet-teixeira) - Métodos, Slide**
+- **[@Franklyn-S](https://github.com/Franklyn-S) - Métodos**
+- **[@dqrtec](https://github.com/dqrtec) - Documentação, Slide, Interface Grafica**
 
 ## Especificações
 
@@ -21,24 +21,12 @@ O deslocamento da extremidade de um foguete espacial ao entrar na atmosfera da t
 - **Fornecer um quadro comparativo, com isolamento, raízes e dados para cada método.**
 - **Analisar o efeito da variação do valor de a de cada foguete, para cada método dado.**
 
+**Dados de entrada:** n (número de foguetes), a (de cada foguete) e &epsilon; (precisão).
 
-<<<<<<< HEAD
-## Contribuições e Divisao de tarefas
-
-- **[@SanDiegoCastilho](https://github.com/SanDiegoCastilho) - Metodos, Slide, Lider**
-- **[@Lukiam23](https://github.com/Lukiam23) - Metodos, Diagrama de Classes**
-- **[@samirbraga](https://github.com/samirbraga) - Metodos**
-- **[@tibet-teixeira](https://github.com/tibet-teixeira) - Metodos, Slide**
-- **[@Franklyn-S](https://github.com/Franklyn-S) - Metodos**
-- **[@dqrtec](https://github.com/dqrtec) - Documentação, Slide, Interface Grafica**
-
+**Dados de saída:** quadros resposta (com d, E<sub>A</sub> para cada foguete e método) e comparativo.
 
 ## Comportamento da funcao f(d)= A*d - d*ln(d)
 
 A=5
 ![alt text](https://raw.githubusercontent.com/Lukiam23/Trab1_Metodos_Numericos/blob/master/comportamentoFuncao/a5.png)
-=======
-**Dados de entrada:** n (número de foguetes), a (de cada foguete) e &epsilon; (precisão).
 
-**Dados de saída:** quadros resposta (com d, E<sub>A</sub> para cada foguete e método) e comparativo.
->>>>>>> zoso-dev
