@@ -7,6 +7,7 @@
  - Samir Braga Chaves [@samirbraga](https://github.com/samirbraga)
  - Tibet Teixeira[@tibet-teixeira](https://github.com/tibet-teixeira)
  - Franklyn Seabra [@Franklyn-S](https://github.com/Franklyn-S)
+ - Daniel de Queiroz [@dqrtec](https://github.com/dqrtec)
 
 ## Especificações
 
@@ -23,3 +24,13 @@ calcular esse deslocamento d da extremidade de um foguete espacial considerado c
 - **Fornecer um quadro resposta, variando os valores de a para vários foguetes.**
 - **Fornecer um quadro comparativo, com isolamento, raízes e dados para cada método.**
 - **Analisar o efeito da variação do valor de a de cada foguete, para cada método dado.**
+
+
+## Contribuições e Divisao de tarefas
+
+- **[@SanDiegoCastilho](https://github.com/SanDiegoCastilho) - Metodos, Slide, Lider**
+- **[@Lukiam23](https://github.com/Lukiam23) - Metodos, Diagrama de Classes**
+- **[@samirbraga](https://github.com/samirbraga) - Metodos**
+- **[@tibet-teixeira](https://github.com/tibet-teixeira) - Metodos, Slide**
+- **[@Franklyn-S](https://github.com/Franklyn-S) - Metodos**
+- **[@dqrtec](https://github.com/dqrtec) - Documentação, Slide, Interface Grafica**
