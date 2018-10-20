@@ -62,9 +62,12 @@ double NewtonRapson(double (*f)(double), double (*phi)(double), double x0, doubl
 }
 
 
+/*
 int main()
 {
 	double raiz = NewtonRapson(f, phi, 0.5, 5*pow(10,-4), 5 * pow(10,-4), 20);
 	cout << raiz << endl;
 	return 0;
 }
+
+ */

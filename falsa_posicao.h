@@ -75,10 +75,10 @@ double falsePosition(double (*f)(double), double a, double b, double e1, double 
 	return x;
 }
 
-
+/*
 int main() {
 	double erro = pow(10,-4);
 	double raiz = falsePosition(f, 2, 3, erro, erro, 20);
 	cout << "Raiz: " << raiz << endl;
 	return 0;
-}
+}*/
