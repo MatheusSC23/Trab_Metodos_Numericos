@@ -1,11 +1,14 @@
-#include "falsa_posicao.h"
-#include "bissecao.h"
+#include "FalsaPosicao.h"
+#include "Bissecao.h"
 //#include "newton_rapson.h"
 
 int main(int argc, char const *argv[]) {
 	
-	double raiz = falsa_posicao(1, pow(10,-5), 30);
-	cout << "Raiz: " << raiz << endl;
+	FalsaPosicao fs(1, pow(10,-5), 30);
+	Bissecao b(1, pow(10,-5), 30);
 
+	fs.falsa_posicao();
+	b.bissecao();
+	
 	return 0;
 }

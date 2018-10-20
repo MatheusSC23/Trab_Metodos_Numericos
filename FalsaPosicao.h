@@ -32,12 +32,14 @@ public:
 
 	void isolamento (double a) {
 		double d = exp(a);
-		int* intervalo = (int*) malloc(sizeof(int) * 2);
 		this->a =  floor(d);
 		this->b = floor(d) + 1;
 	}
 
-	double falsa_posicao() {
+	double falsa_posicao () {
+
+		isolamento(this->parametroAjuste);
+
 		double a = this->a;
 		double b = this->b;
 		double parametroAjuste = this->parametroAjuste;
@@ -102,5 +104,6 @@ public:
 	 
 		return x;
 	}
-}
+};
+
 #endif
