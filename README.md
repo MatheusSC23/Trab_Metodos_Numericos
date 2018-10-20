@@ -25,8 +25,8 @@ O deslocamento da extremidade de um foguete espacial ao entrar na atmosfera da t
 
 **Dados de saída:** quadros resposta (com d, E<sub>A</sub> para cada foguete e método) e comparativo.
 
+
 ## Comportamento da funcao f(d)= A*d - d*ln(d)
 
-A=5
-![alt text](https://raw.githubusercontent.com/Lukiam23/Trab1_Metodos_Numericos/blob/master/comportamentoFuncao/a5.png)
+![a00000001](https://user-images.githubusercontent.com/20565933/47260586-a1d2df80-d494-11e8-9f31-ed8ac65a9f6e.png)
 
