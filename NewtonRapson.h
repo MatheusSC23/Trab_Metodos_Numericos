@@ -9,20 +9,21 @@ using namespace std;
 class NewtonRapson {
 
 private:
-	double parametroAjuste;
+	double fitParam;
 	double x0;
 	double e;
 	int maxIter;
 
 public:
-	NewtonRapson (double ajuste, double erro, double iteracoes) {
-		parametroAjuste = ajuste;
+	NewtonRapson (double fit, double error, double iters) {
+		fitParam = fit;
 		e = erro;
-		maxIter = iteracoes;
+		maxIter = iters;
 	}
 
-	/* d é o deslocamento medido em cm e 
-	 * a é um parâmetro de ajuste para que se projete um foguete com a máxima segurança e eficiência possível
+	/* 'd' - is the offset measured in centimeter
+	 * 'a' - is a paramter of fit for keep safe a rocket
+	 * 		 with the max safety and possible efficiency
 	 */
 	double f (double d, double a) {
 		return a * d - d * log(d);
@@ -38,20 +39,20 @@ public:
 	}
 
 
-	void pontoInicial (double a) {
+	void initPoint (double a) {
 		this->x0 = exp(a) + 0.5;
 	}
 
 
-	double newton_rapson () {
-		pontoInicial(this->parametroAjuste);
+	double newtonRapson () {
+		initPoint(this->fitParam);
 
 		double x0 = this->x0;
-		double parametroAjuste = this->parametroAjuste;
+		double fitParam = this->fitParam;
 		double e = this->e;
 		int maxIter = this->maxIter;
 
-		double fx0 = f(x0, parametroAjuste);
+		double fx0 = f(x0, fitParam);
 
 		if(abs(fx0) < e) return x0;
 
@@ -59,7 +60,7 @@ public:
 		double x1;
 		double fx1;
 
-		//cabeçalho
+		// Header
 		cout.precision(6);
 		cout << fixed;
 		cout << "k" << " | ";
@@ -70,17 +71,17 @@ public:
 		cout << 0 << " | ";
 		cout << x0 << " | ";
 		cout << fx0 << "  | ";
-		cout << fLine(x0, parametroAjuste) <<endl;
+		cout << fLine(x0, fitParam) <<endl;
 
-		while(k < maxIter){
-			x1 = phi(x0, parametroAjuste);
-			fx1 = f(x1, parametroAjuste);
+		while (k < maxIter){
+			x1 = phi(x0, fitParam);
+			fx1 = f(x1, fitParam);
 
-			//prints
+			// Prints
 			cout << k << " | ";
 			cout << x1 << " | ";
 			cout << fx1 << " | ";
-			cout << fLine(x1, parametroAjuste) <<endl;
+			cout << fLine(x1, fitParam) <<endl;
 
 			if (abs(x1 - x0) < e or abs(fx1) < e ){
 				return x1;
@@ -93,4 +94,5 @@ public:
 		return x1;
 	}
 };
+
 #endif

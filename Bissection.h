@@ -1,49 +1,46 @@
-#ifndef BISSECAO_H
-#define BISSECAO_H
+#ifndef BISSECTION_H
+#define BISSECTION_H
 
 #include <iostream>
 #include <cmath>
 
 using namespace std;
 
-class Bissecao {
-
+class Bissection {
 private:
-	double parametroAjuste;
+	double fitParam;
 	double a;
 	double b;
 	double e;
 	int maxIter;
 
-
 public:
-
-	Bissecao (double ajuste, double erro, double iteracoes) {
-		parametroAjuste = ajuste;
-		e = erro;
-		maxIter = iteracoes;
+	Bissection (double fit, double error, double iters) {
+		fitParam = fit;
+		e = error;
+		maxIter = iters;
 	}
 
-	/* d é o deslocamento medido em cm
-	 * a é um parâmetro de ajuste para que se projete um foguete com a máxima segurança e eficiência possível
+	/* 'd' - is the offset measured in centimeter
+	 * 'a' - is a paramter of fit for keep safe a rocket
+	 * 		 with the max safety and possible efficiency
 	 */
 	double f (double d, double a) {
 		return a * d - d * log(d);
 	}
 
-	void isolamento (double a) {
+	void isolation (double a) {
 		double d = exp(a);
-		this->a =  floor(d);
+		this->a = floor(d);
 		this->b = floor(d) + 1;
 	}
 
-	double bissecao () {
-		
-		isolamento(this->parametroAjuste);
+	double bissection () {
+		isolation(this->fitParam);
 
 		double a = this->a;
 		double b = this->b;
-		double parametroAjuste = this->parametroAjuste;
+		double fitParam = this->fitParam;
 		double e = this->e;
 		int maxIter = this->maxIter;
 
@@ -53,7 +50,7 @@ public:
 		double x;
 		double fx;
 
-		//cabeçalho
+		// Header
 		cout.precision(6);
 		cout << fixed;
 		cout << "k" << " | ";
@@ -61,12 +58,11 @@ public:
 		cout << "  f(x) " << " | ";
 		cout << "b - a" << endl;
 
-		while((b - a) >= e && k < maxIter) {
-			
+		while ((b - a) >= e && k < maxIter) {			
 			k += 1;
 			
 			x = (a + b) / 2;	
-			fx = f(x, parametroAjuste);
+			fx = f(x, fitParam);
 		
 			if(fx > 0) {
 				a = x;
@@ -74,14 +70,17 @@ public:
 				b = x;
 			}
 
-			//prints
+			// Prints
 			cout << k << " | ";
 			cout << x << " | ";
+
 			if(fx >= 0) {
 				cout << "+";
 			}
+
 			cout << fx << " | ";
 			cout << b - a << endl;
+
 			if(abs(fx) < e){
 				return x;
 			}
@@ -90,4 +89,5 @@ public:
 		return x;
 	}
 };
+
 #endif
