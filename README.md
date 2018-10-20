@@ -39,4 +39,4 @@ calcular esse deslocamento d da extremidade de um foguete espacial considerado c
 ## Comportamento da funcao f(d)= A*d - d*ln(d)
 
 A=5
-<img src="https://github.com/Lukiam23/Trab1_Metodos_Numericos/tree/master/comportamentoFuncao/a5.png">
+![alt text](https://raw.githubusercontent.com/Lukiam23/Trab1_Metodos_Numericos/blob/master/comportamentoFuncao/a5.png)
