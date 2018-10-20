@@ -36,7 +36,15 @@ calcular esse deslocamento d da extremidade de um foguete espacial considerado c
 - **[@dqrtec](https://github.com/dqrtec) - Documentação, Slide, Interface Grafica**
 
 
+
 ## Comportamento da funcao f(d)= A*d - d*ln(d)
 
-A=5
-![alt text](https://raw.githubusercontent.com/Lukiam23/Trab1_Metodos_Numericos/blob/master/comportamentoFuncao/a5.png)
+![a5](https://user-images.githubusercontent.com/20565933/47260562-4b65a100-d494-11e8-817e-ead0d67a9299.png)
+
+![a3](https://user-images.githubusercontent.com/20565933/47260569-76e88b80-d494-11e8-82ec-ae5ef52d01e4.png)
+
+![a1](https://user-images.githubusercontent.com/20565933/47260573-87990180-d494-11e8-9da1-7bc6af3e8eed.png)
+
+![a05](https://user-images.githubusercontent.com/20565933/47260580-941d5a00-d494-11e8-8fc1-f3822908a1a8.png)
+
+![a00000001](https://user-images.githubusercontent.com/20565933/47260586-a1d2df80-d494-11e8-9f31-ed8ac65a9f6e.png)
