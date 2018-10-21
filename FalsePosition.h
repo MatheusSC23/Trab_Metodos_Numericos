@@ -19,7 +19,7 @@ public:
 
 	FalsePosition (double fit, double error, double iters) {
 		fitParam = fit;
-		e = erro;
+		e = error;
 		maxIter = iters;
 	}
 

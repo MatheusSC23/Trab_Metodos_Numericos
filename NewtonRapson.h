@@ -17,7 +17,7 @@ private:
 public:
 	NewtonRapson (double fit, double error, double iters) {
 		fitParam = fit;
-		e = erro;
+		e = error;
 		maxIter = iters;
 	}
 
