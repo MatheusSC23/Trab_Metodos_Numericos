@@ -215,18 +215,20 @@ string Terminal::insertParagraph(string text) {
     int textLen = text.length();
     int breaks = ceil((float)textLen / (float)widthMargined) - 1;
     string lines[breaks + 1];
-    int sizes[breaks + 1];
 
     int offset = 0;
     for (int i = 0; i < breaks + 1; i++) {
-        int start = i * widthMargined;
+        int start = i * widthMargined + offset;
         while (text[start] != ' ' && start != 0) start++;
-
+        
+        offset = 0;
         int end = widthMargined;
-        while (text[start + end] != ' ' && start + end < breaks * widthMargined - 1) end++;
+        while (text[start + end] != ' ' && text[start + end]) {
+            end++;
+            offset++;
+        }
 
         lines[i] = text.substr(start, end);
-        sizes[i] = end - start;
     }
 
     string result = "";
