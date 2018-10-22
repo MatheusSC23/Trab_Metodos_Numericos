@@ -1,3 +1,4 @@
+#include <iomanip>
 #include <clocale>
 #include <string>
 #include <iostream>
@@ -16,6 +17,13 @@ namespace strutil {
     wstring str2wstr(string);
     string wstr2str(wstring);
     string substring(string, int, int);
+    string double2str(double, int);
+};
+
+string strutil::double2str(double num, int precision) {
+    std::stringstream nums;
+    nums << std::fixed << std::setprecision(precision) << num;
+    return nums.str();
 };
 
 wstring strutil::str2wstr(string str) {

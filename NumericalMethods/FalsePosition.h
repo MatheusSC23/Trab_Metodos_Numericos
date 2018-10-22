@@ -40,8 +40,12 @@ public:
 		return a * d - d * log(d);
 	}
 
-	string getIsolation () {
-		return "[" + to_string(a) + ", " + to_string(b) + "]"; 
+	double getIsolationStart () {
+		return a; 
+	}
+
+	double getIsolationEnd () {
+		return b; 
 	}
 
 	void isolation (double fit) {

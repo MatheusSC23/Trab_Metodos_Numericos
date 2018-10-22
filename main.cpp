@@ -3,11 +3,10 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "../NumericalMethods/FalsePosition.h"
-#include "../NumericalMethods/Bissection.h"
-#include "../NumericalMethods/NewtonRapson.h"   
-
-#include "terminal.h"
+#include "./NumericalMethods/FalsePosition.h"
+#include "./NumericalMethods/Bissection.h"
+#include "./NumericalMethods/NewtonRapson.h"   
+#include "./TerminalBootstrap/terminal.h"
 
 using namespace std;
 
@@ -66,6 +65,8 @@ int main(void) {
     string methodsHeader[7] = {"Foguete", "A", "Isolamento", "Bisseção", "Posição Falsa", "Newthon-Raphson", "Explodiu?"};
     cout << Terminal::insertTHeader(7, methodsHeader) << endl;
 
+    cout.precision(5);
+
     for (int i = 0; i < rockets; i++) {
         FalsePosition fs(rocketsData[i][0], rocketsData[i][1], iterMax);
         Bissection b(rocketsData[i][0], rocketsData[i][1], iterMax);
@@ -78,7 +79,7 @@ int main(void) {
         string methodsRoots[7] = {
             to_string(i + 1),
             to_string(rocketsData[i][0]),
-            fs.getIsolation(),
+            "[" + strutil::double2str(fs.getIsolationStart(), 2) + ", " + strutil::double2str(fs.getIsolationEnd(), 2) + "]",
             to_string(fs_result),
             to_string(b_result),
             to_string(nr_result),
@@ -111,7 +112,7 @@ int main(void) {
     cout << Terminal::insertTFooter(3) << endl;
 
     cout << Terminal::insertHR() << endl;
-    cout << Terminal::insertSubtitle("QUADRO COMPARATIVO") << endl;
+    Terminal::insertInput("<ENTER> para sair...");
 
     return 0;
 }
