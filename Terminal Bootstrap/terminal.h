@@ -88,7 +88,7 @@ void Terminal::clear() {
 };
 
 void Terminal::setBoxWidth(int w) {
-    width = w;
+    width = w < 60 ? 60 : w;
 };
 
 string Terminal::insertTitle(string title) {

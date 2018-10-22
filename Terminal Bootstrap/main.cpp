@@ -9,7 +9,7 @@ using namespace std;
 
 int main(void) {
     Terminal::clear();
-    Terminal::setBoxWidth(90);
+    Terminal::setBoxWidth(120);
     std::setlocale(LC_ALL, "en_US.utf8");
 
     cout << Terminal::insertHeader("ROCKET EXPLOSION DETECTION") << endl;
@@ -41,17 +41,31 @@ int main(void) {
 
     cout << Terminal::insertTitle("CONFIRA ABAIXO OS DADOS INSERIDOS") << endl;
 
-    string theaders[3] = {"Foguete", "Parâmetro de Ajuste", "Precisão"};
-    cout << Terminal::insertTHeader(3, theaders) << endl;
+    string rocketsHeader[3] = {"Foguete", "Parâmetro de Ajuste", "Precisão"};
+    cout << Terminal::insertTHeader(3, rocketsHeader) << endl;
 
     for (int i = 0; i < rockets; i++) {
-        float data[3] = {i + 1, rocketsData[i][0], rocketsData[i][1]};
+        float data[3] = {(float)(i + 1), rocketsData[i][0], rocketsData[i][1]};
         cout << Terminal::insertTRow(3, data) << endl;
     }
 
     cout << Terminal::insertTFooter(3) << endl;
 
     Terminal::insertInput("<ENTER> para continuar...");
+
+    Terminal::clear();
+
+    cout << Terminal::insertHeader("ROCKET EXPLOSION DETECTION") << endl;
+
+    cout << Terminal::insertTitle("EXECUÇÃO DOS MÉTODOS") << endl;
+
+    string methodsHeader[4] = {"Métodos", "Bisseção", "Posição Falsa", "Newthon-Raphson"};
+    cout << Terminal::insertTHeader(4, methodsHeader) << endl;
+    cout << Terminal::insertTFooter(4) << endl;
+
+
+    cout << Terminal::insertHR() << endl;
+    cout << Terminal::insertSubtitle("QUADRO COMPARATIVO") << endl;
 
     return 0;
 }
