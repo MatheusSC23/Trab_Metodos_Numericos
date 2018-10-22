@@ -30,6 +30,9 @@ class Terminal {
     static string V_SIDE_SGL;
     static string V_SIDE_CONNECT_BOTTOM_SGL;
     static string V_SIDE_CONNECT_TOP_SGL;
+    static string V_SIDE_CONNECT_LEFT_SGL;
+    static string V_SIDE_CONNECT_RIGHT_SGL;
+    static string V_CONNECT_CROSS_SGL;
     static string H_SIDE_SGL;
 
   public:
@@ -38,16 +41,21 @@ class Terminal {
     static string insertSectionStart();
     static string insertTitle(string);
     static string insertSubtitle(string);
-    static string insertRow(int, string[]);
+    static string insertTRow(int, string[]);
+    static string insertTRow(int, float[]);
+    static string insertTHeader(int, string[]);
+    static string insertTFooter(int);
     static string insertHR();
     static string insertHalfHR();
     static string insertParagraph(string);
     static string insertBlankSpace();
     static string insertBottomLine();
     static string insertTopLine();
-    static void insertInput(string, string);
+    static void insertInput(string, string*);
+    static void insertInput(string, string&);
     static void insertInput(string, int&);
-    static void insertInput(string, float);
+    static void insertInput(string, float&);
+    static void insertInput(string);
     static void clear();
 };
 
@@ -69,6 +77,9 @@ string Terminal::BOTTOM_RIGHT_SGL = "┘";
 string Terminal::V_SIDE_SGL = "─";
 string Terminal::V_SIDE_CONNECT_BOTTOM_SGL = "┬";
 string Terminal::V_SIDE_CONNECT_TOP_SGL = "┴";
+string Terminal::V_SIDE_CONNECT_LEFT_SGL = "├";
+string Terminal::V_SIDE_CONNECT_RIGHT_SGL = "┤";
+string Terminal::V_CONNECT_CROSS_SGL = "┼";
 string Terminal::H_SIDE_SGL = "│";
 
 void Terminal::clear() {
@@ -126,16 +137,75 @@ string Terminal::insertSectionStart() {
     return line;
 };
 
-string Terminal::insertRow(int columns, string cells[]) {
+string Terminal::insertTHeader(int columns, string cells[]) {
+    int columnSize = width / columns;
+    string result = TOP_LEFT_SGL;
+
+    for (int i = 0; i < columns; i++) {
+        result += strutil::repeat(V_SIDE_SGL, columnSize - (i == columns - 1 ? 2 : 1));
+        result += i == columns - 1 ? "" : V_SIDE_CONNECT_BOTTOM_SGL;
+    }
+
+    result += TOP_RIGHT_SGL;
+    result += "\n";
+
+    for (int i = 0; i < columns; i++) {
+        result += H_SIDE_SGL;
+        result += strutil::centerify(cells[i], columnSize - (i == columns - 1 ? 2 : 1));
+    }
+
+    result += H_SIDE_SGL;
+    result += "\n";
+    result += V_SIDE_CONNECT_LEFT_SGL;
+
+    for (int i = 0; i < columns; i++) {
+        result += strutil::repeat(V_SIDE_SGL, columnSize - (i == columns - 1 ? 2 : 1));
+        result += i == columns - 1 ? "" : V_CONNECT_CROSS_SGL;
+    }
+
+    result += V_SIDE_CONNECT_RIGHT_SGL;
+
+    return result;
+};
+
+string Terminal::insertTRow(int columns, string cells[]) {
     int columnSize = width/columns;
     string result = "";
 
     for (int i = 0; i < columns; i++) {
         result += H_SIDE_SGL;
-        result += strutil::centerify(cells[i], columnSize - 1);
+        result += strutil::centerify(cells[i], columnSize - (i == columns - 1 ? 2 : 1));
     }
 
     result += H_SIDE_SGL;
+
+    return result;
+};
+
+string Terminal::insertTRow(int columns, float cells[]) {
+    int columnSize = width/columns;
+    string result = "";
+
+    for (int i = 0; i < columns; i++) {
+        result += H_SIDE_SGL;
+        result += strutil::centerify(to_string(cells[i]), columnSize - (i == columns - 1 ? 2 : 1));
+    }
+
+    result += H_SIDE_SGL;
+
+    return result;
+};
+
+string Terminal::insertTFooter(int columns) {
+    int columnSize = width / columns;
+    string result = BOTTOM_LEFT_SGL;
+
+    for (int i = 0; i < columns; i++) {
+        result += strutil::repeat(V_SIDE_SGL, columnSize - (i == columns - 1 ? 2 : 1));
+        result += i == columns - 1 ? "" : V_SIDE_CONNECT_TOP_SGL;
+    }
+
+    result += BOTTOM_RIGHT_SGL;
 
     return result;
 };
@@ -179,9 +249,14 @@ string Terminal::insertTopLine() {
     return strutil::wrapd(strutil::repeat(V_SIDE_SGL, width - 2), TOP_LEFT_SGL, TOP_RIGHT_SGL);
 };
 
-void Terminal::insertInput(string text, string input) {
+void Terminal::insertInput(string text, string& input) {
     cout << "    " + text;
     cin >> input;
+};
+
+void Terminal::insertInput(string text, string *input) {
+    cout << "    " + text;
+    cin >> (*input);
 };
 
 void Terminal::insertInput(string text, int& input) {
@@ -189,7 +264,13 @@ void Terminal::insertInput(string text, int& input) {
     cin >> input;
 };
 
-void Terminal::insertInput(string text, float input) {
+void Terminal::insertInput(string text, float& input) {
     cout << "    " + text;
     cin >> input;
+};
+
+void Terminal::insertInput(string text) {
+    cout << "    " + text;
+    fgetc(stdin);
+    std::cin.ignore(1e10, '\n');
 };
