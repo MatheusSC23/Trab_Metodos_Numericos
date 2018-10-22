@@ -118,7 +118,7 @@ int main(void) {
 
     cout << Terminal::insertHeader("ROCKET EXPLOSION DETECTION") << endl;
 
-    cout << Terminal::insertTitle("ANÁLISE DA VARIAÇÃO DO VALOR DE 'A' PARA CADA MÉTODO") << endl;
+    cout << Terminal::insertTitle("ERRO ABSOLUTO ENTRE CADA MÉTODO") << endl;
 
     for (int i = 0; i < rockets; i++) {
         cout << Terminal::insertSubtitle("FOGUETE " + to_string(i + 1)) << endl;
@@ -144,6 +144,45 @@ int main(void) {
         cout << Terminal::insertTRow(3, varianceRoots) << endl;
 
         cout << Terminal::insertTFooter(3) << endl;
+
+        cout << Terminal::insertHR() << endl;
+    }
+
+    Terminal::insertInput("<ENTER> para continuar...");
+
+    Terminal::clear();
+
+    cout << Terminal::insertHeader("ROCKET EXPLOSION DETECTION") << endl;
+
+    cout << Terminal::insertTitle("ANÁLISE DA VARIAÇÃO DO VALOR DE 'A' PARA CADA MÉTODO") << endl;
+
+    for (int i = 0; i < rockets; i++) {
+        cout << Terminal::insertSubtitle("FOGUETE " + to_string(i + 1)) << endl;
+        
+        string varianceHeader[4] = {"A", "Posição Falsa", "Bisseção", "Newthon-Raphson"};
+        cout << Terminal::insertTHeader(4, varianceHeader) << endl;
+
+        for (int j = -2; j < 4; j++) {
+            double a = rocketsData[i][0] + 0.1 * j;
+            FalsePosition fs(a, rocketsData[i][1], iterMax);
+            Bissection b(a, rocketsData[i][1], iterMax);
+            NewtonRapson nr(a, rocketsData[i][1], iterMax);
+
+            double fs_result = fs.falsePosition();
+            double b_result = b.bissection();
+            double nr_result = nr.newtonRapson();
+
+            string varianceRoots[4] = {
+                to_string(a),
+                to_string(abs(b.bissection() - fs.falsePosition())),
+                to_string(abs(b.bissection() - nr.newtonRapson())),
+                to_string(abs(nr.newtonRapson() - fs.falsePosition()))
+            };
+
+            cout << Terminal::insertTRow(4, varianceRoots) << endl;   
+        }
+
+        cout << Terminal::insertTFooter(4) << endl;
 
         cout << Terminal::insertHR() << endl;
     }
