@@ -62,7 +62,7 @@ int main(void) {
 
     cout << Terminal::insertTitle("EXECUÇÃO DOS MÉTODOS") << endl;
 
-    string methodsHeader[7] = {"Foguete", "A", "Isolamento", "Bisseção", "Posição Falsa", "Newthon-Raphson", "Explodiu?"};
+    string methodsHeader[7] = {"Foguete", "A", "Isolamento", "Posição Falsa", "Bisseção", "Newthon-Raphson", "Explodiu?"};
     cout << Terminal::insertTHeader(7, methodsHeader) << endl;
 
     cout.precision(5);
@@ -94,7 +94,7 @@ int main(void) {
     cout << Terminal::insertHR() << endl;
     cout << Terminal::insertTitle("SISTEMA CALIBRADO USANDO COMO PADRÃO A = 1, ISOLAMENTO = (2, 3) E PHI = 10⁻⁵") << endl;
 
-    string calibrateHeader[3] = {"Bisseção", "Posição Falsa", "Newthon-Raphson"};
+    string calibrateHeader[3] = {"Posição Falsa", "Bisseção", "Newthon-Raphson"};
     cout << Terminal::insertTHeader(3, calibrateHeader) << endl;
 
     int a = 1;
@@ -174,9 +174,9 @@ int main(void) {
 
             string varianceRoots[4] = {
                 to_string(a),
-                to_string(abs(b.bissection() - fs.falsePosition())),
-                to_string(abs(b.bissection() - nr.newtonRapson())),
-                to_string(abs(nr.newtonRapson() - fs.falsePosition()))
+                to_string(fs.falsePosition()),
+                to_string(b.bissection()),
+                to_string(nr.newtonRapson())
             };
 
             cout << Terminal::insertTRow(4, varianceRoots) << endl;   

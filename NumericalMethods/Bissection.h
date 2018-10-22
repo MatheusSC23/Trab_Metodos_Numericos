@@ -39,9 +39,19 @@ public:
 	}
 
 	void isolation (double fit) {
-		double d = exp(fit);
-		this->a = floor(d);
-		this->b = floor(d) + 1;
+		this->a = 0.000001;
+		this->b = 1;
+
+		double fa = f(this->a, fit);
+		double fb = f(this->b, fit);
+
+		while (fa * fb > 0) {
+			this->a = this->b;
+			this->b += 1;
+
+			fa = f(this->a, fit);
+			fb = f(this->b, fit);
+		}
 	}
 
 	double bissection () {
@@ -59,10 +69,10 @@ public:
 
 		while (abs(b - a) >= e && k < maxIter) {			
 			k += 1;
-			
+
 			x = (a + b) / 2;	
 			fx = f(x, fitParam);
-		
+
 			if(fx > 0) {
 				a = x;
 			} else {
