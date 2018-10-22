@@ -3,6 +3,10 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include "../NumericalMethods/FalsePosition.h"
+#include "../NumericalMethods/Bissection.h"
+#include "../NumericalMethods/NewtonRapson.h"   
+
 #include "terminal.h"
 
 using namespace std;
@@ -59,10 +63,52 @@ int main(void) {
 
     cout << Terminal::insertTitle("EXECUÇÃO DOS MÉTODOS") << endl;
 
-    string methodsHeader[4] = {"Métodos", "Bisseção", "Posição Falsa", "Newthon-Raphson"};
-    cout << Terminal::insertTHeader(4, methodsHeader) << endl;
-    cout << Terminal::insertTFooter(4) << endl;
+    string methodsHeader[7] = {"Foguete", "A", "Isolamento", "Bisseção", "Posição Falsa", "Newthon-Raphson", "Explodiu?"};
+    cout << Terminal::insertTHeader(7, methodsHeader) << endl;
 
+    for (int i = 0; i < rockets; i++) {
+        FalsePosition fs(rocketsData[i][0], rocketsData[i][1], iterMax);
+        Bissection b(rocketsData[i][0], rocketsData[i][1], iterMax);
+        NewtonRapson nr(rocketsData[i][0], rocketsData[i][1], iterMax);
+
+        double fs_result = fs.falsePosition();
+        double b_result = b.bissection();
+        double nr_result = nr.newtonRapson();
+
+        string methodsRoots[7] = {
+            to_string(i + 1),
+            to_string(rocketsData[i][0]),
+            fs.getIsolation(),
+            to_string(fs_result),
+            to_string(b_result),
+            to_string(nr_result),
+            fs_result > 2 ? "SIM" : "NÃO" 
+        };
+
+        cout << Terminal::insertTRow(7, methodsRoots) << endl;
+    }
+
+    cout << Terminal::insertTFooter(7) << endl;
+
+    cout << Terminal::insertHR() << endl;
+    cout << Terminal::insertTitle("SISTEMA CALIBRADO USANDO COMO PADRÃO A = 1, ISOLAMENTO = (2, 3) E PHI = 10⁻⁵") << endl;
+
+    string calibrateHeader[3] = {"Bisseção", "Posição Falsa", "Newthon-Raphson"};
+    cout << Terminal::insertTHeader(3, calibrateHeader) << endl;
+
+    int a = 1;
+    FalsePosition fs(a, 1e-5, iterMax, 2, 3);
+    Bissection b(a, 1e-5, iterMax, 2, 3);
+    NewtonRapson nr(a, 1e-5, iterMax);
+
+    string calibrateRoots[3] = {
+        to_string(fs.falsePosition()),
+        to_string(b.bissection()),
+        to_string(nr.newtonRapson())
+    };
+
+    cout << Terminal::insertTRow(3, calibrateRoots) << endl;
+    cout << Terminal::insertTFooter(3) << endl;
 
     cout << Terminal::insertHR() << endl;
     cout << Terminal::insertSubtitle("QUADRO COMPARATIVO") << endl;

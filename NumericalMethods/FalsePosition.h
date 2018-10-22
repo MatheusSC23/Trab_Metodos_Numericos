@@ -10,9 +10,9 @@ class FalsePosition {
 
 private:
 	double fitParam;
+	double e;
 	double a;
 	double b;
-	double e;
 	int maxIter;
 
 public:
@@ -21,6 +21,15 @@ public:
 		fitParam = fit;
 		e = error;
 		maxIter = iters;
+		isolation(this->fitParam);
+	}
+
+	FalsePosition (double fit, double error, double iters, double a, double b) {
+		fitParam = fit;
+		e = error;
+		maxIter = iters;
+		this->a = a;
+		this->b = b;
 	}
 
 	/* 'd' - is the offset measured in centimeter
@@ -31,16 +40,17 @@ public:
 		return a * d - d * log(d);
 	}
 
-	void isolation (double a) {
-		double d = exp(a);
+	string getIsolation () {
+		return "[" + to_string(a) + ", " + to_string(b) + "]"; 
+	}
+
+	void isolation (double fit) {
+		double d = exp(fit);
 		this->a = floor(d);
 		this->b = floor(d) + 1;
 	}
 
 	double falsePosition () {
-
-		isolation(this->fitParam);
-
 		double a = this->a;
 		double b = this->b;
 		double fitParam = this->fitParam;
@@ -56,14 +66,6 @@ public:
 		double fx; // function f applied to 'x'
 		double fa; // function f applied to 'a'
 		double fb; // function f applied to 'b'
-
-		// Header
-		cout.precision(6);
-		cout << fixed;
-		cout << "k" << " | ";
-		cout << "   x  " << " | ";
-		cout << "  f(x) " << " | ";
-		cout << "b-a" << endl;
 
 		fa = f(a, fitParam);
 		fb = f(b, fitParam);
@@ -88,12 +90,6 @@ public:
 			fx = f(x, fitParam);
 
 			k++;
-
-			// Prints
-			cout << k << " | ";
-			cout << x << " | ";
-			cout << fx << " | ";
-			cout << b - a << endl;
 			
 			if (fx > 0) {
 				a = x;

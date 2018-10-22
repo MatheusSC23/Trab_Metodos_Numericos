@@ -1,6 +1,6 @@
-#include "FalsePosition.h"
-#include "Bissection.h"
-#include "NewtonRapson.h"
+#include "../NumericalMethods/FalsePosition.h"
+#include "../NumericalMethods/Bissection.h"
+#include "../NumericalMethods/NewtonRapson.h"
 
 int main(int argc, char const *argv[]) {
 

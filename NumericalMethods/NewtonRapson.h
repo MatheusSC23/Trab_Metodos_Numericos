@@ -60,28 +60,9 @@ public:
 		double x1;
 		double fx1;
 
-		// Header
-		cout.precision(6);
-		cout << fixed;
-		cout << "k" << " | ";
-		cout << "   x  " << " | ";
-		cout << "f(x)  " << "  | ";
-		cout << "f'(x)" << endl;
-
-		cout << 0 << " | ";
-		cout << x0 << " | ";
-		cout << fx0 << "  | ";
-		cout << fLine(x0, fitParam) <<endl;
-
 		while (k < maxIter){
 			x1 = phi(x0, fitParam);
 			fx1 = f(x1, fitParam);
-
-			// Prints
-			cout << k << " | ";
-			cout << x1 << " | ";
-			cout << fx1 << " | ";
-			cout << fLine(x1, fitParam) <<endl;
 
 			if (abs(x1 - x0) < e or abs(fx1) < e ){
 				return x1;

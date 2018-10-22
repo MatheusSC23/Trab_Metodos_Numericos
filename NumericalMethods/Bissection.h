@@ -19,6 +19,15 @@ public:
 		fitParam = fit;
 		e = error;
 		maxIter = iters;
+		isolation(this->fitParam);
+	}
+
+	Bissection (double fit, double error, double iters, double a, double b) {
+		fitParam = fit;
+		e = error;
+		maxIter = iters;
+		this->a = a;
+		this->b = b;
 	}
 
 	/* 'd' - is the offset measured in centimeter
@@ -29,36 +38,26 @@ public:
 		return a * d - d * log(d);
 	}
 
-	void isolation (double a) {
-		double d = exp(a);
+	void isolation (double fit) {
+		double d = exp(fit);
 		this->a = floor(d);
 		this->b = floor(d) + 1;
 	}
 
 	double bissection () {
-		isolation(this->fitParam);
-
 		double a = this->a;
 		double b = this->b;
 		double fitParam = this->fitParam;
 		double e = this->e;
 		int maxIter = this->maxIter;
 
-		if (b - a < e) return a;
+		if (abs(b - a) < e) return a;
 
 		int k = 0;
 		double x;
 		double fx;
 
-		// Header
-		cout.precision(6);
-		cout << fixed;
-		cout << "k" << " | ";
-		cout << "   x  " << " | ";
-		cout << "  f(x) " << " | ";
-		cout << "b - a" << endl;
-
-		while ((b - a) >= e && k < maxIter) {			
+		while (abs(b - a) >= e && k < maxIter) {			
 			k += 1;
 			
 			x = (a + b) / 2;	
@@ -69,17 +68,6 @@ public:
 			} else {
 				b = x;
 			}
-
-			// Prints
-			cout << k << " | ";
-			cout << x << " | ";
-
-			if(fx >= 0) {
-				cout << "+";
-			}
-
-			cout << fx << " | ";
-			cout << b - a << endl;
 
 			if(abs(fx) < e){
 				return x;
