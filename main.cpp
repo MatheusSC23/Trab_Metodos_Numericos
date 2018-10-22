@@ -83,7 +83,7 @@ int main(void) {
             to_string(fs_result),
             to_string(b_result),
             to_string(nr_result),
-            fs_result > 2 ? "SIM" : "NÃO" 
+            fs_result > 2 ? "SIM" : "NÃO"
         };
 
         cout << Terminal::insertTRow(7, methodsRoots) << endl;
@@ -112,7 +112,42 @@ int main(void) {
     cout << Terminal::insertTFooter(3) << endl;
 
     cout << Terminal::insertHR() << endl;
-    Terminal::insertInput("<ENTER> para sair...");
+    Terminal::insertInput("<ENTER> para continuar...");
 
+    Terminal::clear();
+
+    cout << Terminal::insertHeader("ROCKET EXPLOSION DETECTION") << endl;
+
+    cout << Terminal::insertTitle("ANÁLISE DA VARIAÇÃO DO VALOR DE 'A' PARA CADA MÉTODO") << endl;
+
+    for (int i = 0; i < rockets; i++) {
+        cout << Terminal::insertSubtitle("FOGUETE " + to_string(i + 1)) << endl;
+        
+        string varianceHeader[3] = {"Bisse. ── Pos. Falsa", "Bisse. ── Newthon", "Pos. Falsa ── Newthon"};
+        cout << Terminal::insertTHeader(3, varianceHeader) << endl;
+
+        double a = rocketsData[i][0];
+        FalsePosition fs(a, rocketsData[i][1], iterMax);
+        Bissection b(a, rocketsData[i][1], iterMax);
+        NewtonRapson nr(a, rocketsData[i][1], iterMax);
+
+        double fs_result = fs.falsePosition();
+        double b_result = b.bissection();
+        double nr_result = nr.newtonRapson();
+
+        string varianceRoots[3] = {
+            to_string(abs(b.bissection() - fs.falsePosition())),
+            to_string(abs(b.bissection() - nr.newtonRapson())),
+            to_string(abs(nr.newtonRapson() - fs.falsePosition()))
+        };
+
+        cout << Terminal::insertTRow(3, varianceRoots) << endl;
+
+        cout << Terminal::insertTFooter(3) << endl;
+
+        cout << Terminal::insertHR() << endl;
+    }
+
+    Terminal::insertInput("<ENTER> para sair...");
     return 0;
 }

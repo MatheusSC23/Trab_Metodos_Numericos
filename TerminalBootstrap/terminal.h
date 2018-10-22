@@ -217,9 +217,10 @@ string Terminal::insertParagraph(string text) {
     string lines[breaks + 1];
     int sizes[breaks + 1];
 
+    int offset = 0;
     for (int i = 0; i < breaks + 1; i++) {
         int start = i * widthMargined;
-        while (text[start] != ' ' && start > 0) start--;
+        while (text[start] != ' ' && start != 0) start++;
 
         int end = widthMargined;
         while (text[start + end] != ' ' && start + end < breaks * widthMargined - 1) end++;
