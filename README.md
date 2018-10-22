@@ -39,7 +39,7 @@ calcular esse deslocamento d da extremidade de um foguete espacial considerado c
 
 ## Comportamento da funcao f(d)= A*d - d*ln(d)
 
-```OBS: Para todo ***A >= ln(2)*** o foguete explode. Sendo 2 o deslocamento máximo```
+```OBS: Para todo **A >= ln(2)** o foguete explode. Sendo 2 o deslocamento máximo```
 <br>
 ```A=3```<br>
 ![a3](https://user-images.githubusercontent.com/20565933/47260569-76e88b80-d494-11e8-82ec-ae5ef52d01e4.png)
