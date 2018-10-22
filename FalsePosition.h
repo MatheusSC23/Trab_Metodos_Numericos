@@ -1,12 +1,13 @@
-#ifndef BISSECTION_H
-#define BISSECTION_H
+#ifndef FALSEPOSITION_H
+#define FALSEPOSITION_H
 
 #include <iostream>
 #include <cmath>
 
 using namespace std;
 
-class Bissection {
+class FalsePosition {
+
 private:
 	double fitParam;
 	double a;
@@ -15,7 +16,8 @@ private:
 	int maxIter;
 
 public:
-	Bissection (double fit, double error, double iters) {
+
+	FalsePosition (double fit, double error, double iters) {
 		fitParam = fit;
 		e = error;
 		maxIter = iters;
@@ -35,7 +37,8 @@ public:
 		this->b = floor(d) + 1;
 	}
 
-	double bissection () {
+	double falsePosition () {
+
 		isolation(this->fitParam);
 
 		double a = this->a;
@@ -44,11 +47,15 @@ public:
 		double e = this->e;
 		int maxIter = this->maxIter;
 
-		if (b - a < e) return a;
+		if (b - a < e) {
+			return a;
+		}
 
 		int k = 0;
 		double x;
-		double fx;
+		double fx; // function f applied to 'x'
+		double fa; // function f applied to 'a'
+		double fb; // function f applied to 'b'
 
 		// Header
 		cout.precision(6);
@@ -56,36 +63,47 @@ public:
 		cout << "k" << " | ";
 		cout << "   x  " << " | ";
 		cout << "  f(x) " << " | ";
-		cout << "b - a" << endl;
+		cout << "b-a" << endl;
 
-		while ((b - a) >= e && k < maxIter) {			
-			k += 1;
-			
-			x = (a + b) / 2;	
-			fx = f(x, fitParam);
-		
-			if(fx > 0) {
-				a = x;
-			} else {
-				b = x;
+		fa = f(a, fitParam);
+		fb = f(b, fitParam);
+
+		while ((b - a) >= e && k < maxIter) {
+			if (fa * fb > 0){
+				throw "Error: function not changes of signal between 'a' and 'b'";
+				cout << "Error: function not changes of signal between 'a' and 'b'" << endl;
 			}
+
+			if (abs(fa) < e) {
+				return a;
+			}
+
+			if (abs(fb) < e) {
+				return b;
+			}
+
+
+			x = ((a * fb) - (b * fa)) / (fb - fa);
+
+			fx = f(x, fitParam);
+
+			k++;
 
 			// Prints
 			cout << k << " | ";
 			cout << x << " | ";
-
-			if(fx >= 0) {
-				cout << "+";
-			}
-
 			cout << fx << " | ";
 			cout << b - a << endl;
-
-			if(abs(fx) < e){
-				return x;
+			
+			if (fx > 0) {
+				a = x;
+				fa = f(a, fitParam);
+			} else {
+				b = x;
+				fb = f(b, fitParam);
 			}
 		}
-
+	 
 		return x;
 	}
 };

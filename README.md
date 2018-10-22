@@ -30,7 +30,25 @@ calcular esse deslocamento d da extremidade de um foguete espacial considerado c
 
 - **[@SanDiegoCastilho](https://github.com/SanDiegoCastilho) - Metodos, Slide, Lider**
 - **[@Lukiam23](https://github.com/Lukiam23) - Metodos, Diagrama de Classes**
-- **[@samirbraga](https://github.com/samirbraga) - Metodos**
+- **[@samirbraga](https://github.com/samirbraga) - Metodos, Interface Grafica**
 - **[@tibet-teixeira](https://github.com/tibet-teixeira) - Metodos, Slide**
-- **[@Franklyn-S](https://github.com/Franklyn-S) - Metodos**
+- **[@Franklyn-S](https://github.com/Franklyn-S) - Metodos, Slide**
 - **[@dqrtec](https://github.com/dqrtec) - Documentação, Slide, Interface Grafica**
+
+
+
+## Comportamento da funcao f(d)= A*d - d*ln(d)
+
+```OBS: Para todo ***A >= ln(2)*** o foguete explode. Sendo 2 o deslocamento máximo```
+<br>
+```A=3```<br>
+![a3](https://user-images.githubusercontent.com/20565933/47260569-76e88b80-d494-11e8-82ec-ae5ef52d01e4.png)
+<br>
+```A=1```<br>
+![a1](https://user-images.githubusercontent.com/20565933/47260573-87990180-d494-11e8-9da1-7bc6af3e8eed.png)
+<br>
+```A=0.5```<br>
+![a05](https://user-images.githubusercontent.com/20565933/47260580-941d5a00-d494-11e8-8fc1-f3822908a1a8.png)
+<br>
+```A=0.0000001```<br>
+![a00000001](https://user-images.githubusercontent.com/20565933/47260586-a1d2df80-d494-11e8-9f31-ed8ac65a9f6e.png)
