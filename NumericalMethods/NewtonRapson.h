@@ -39,8 +39,22 @@ public:
 	}
 
 
-	void initPoint (double a) {
-		this->x0 = exp(a) + 0.5;
+	void initPoint (double fit) {
+		double a = 0.000001;
+		double b = 1;
+
+		double fa = f(a, fit);
+		double fb = f(b, fit);
+
+		while (fa * fb > 0) {
+			a = b;
+			b += 1;
+
+			fa = f(a, fit);
+			fb = f(b, fit);
+		}
+
+		this->x0 = a + 0.5;
 	}
 
 
