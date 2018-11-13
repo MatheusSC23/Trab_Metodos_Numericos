@@ -8,7 +8,7 @@ class Vec
 {
 public:
     int lenght;
-    float vetor[100];
+    float *vetor;
 
     Vec();
     Vec(int lenght);
@@ -37,10 +37,8 @@ Vec::Vec(int tamanho) {
 }
 
 Vec::Vec(int tamanho,float* vetorEntrada){
+vetor = vetorEntrada;
     lenght = tamanho;
-    for (int interadorVetor = 0; interadorVetor < tamanho; interadorVetor++){
-        vetor[interadorVetor] = vetorEntrada[interadorVetor];
-    }
 }
 
 float Vec::returnElement(int indiceColunaElemento){
