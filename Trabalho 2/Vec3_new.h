@@ -10,10 +10,10 @@ class Vec
 {
 	
 private:
-public:
+	double* vec;
 	int size;
-	double *vec;
 
+public:
 
 	Vec(double* vector, int sizeVector) {
 		vec = vector;
@@ -22,7 +22,9 @@ public:
 
 	Vec(const Vec& vector, int sizeVector) {
 		size = sizeVector;
-		vec = vector.vec;
+		for (int i = 0; i < size; i++) {
+			vec[i] = vector.vec[i];
+		}
 	}
 
 	/* -----------------------------------------------------------------------------------------------------
