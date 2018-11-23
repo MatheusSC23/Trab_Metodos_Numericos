@@ -31,58 +31,53 @@ public:
 		Mat3 U(this->defineU());
 
 		Vec3 y(this->SubstituicaoSucessiva(L, f));
-		cout << y << endl;
-
 		Vec3 d(this->SubstituicaoRetroativa(U, y));
-		cout << d << endl;
 
-
-
-		// cout << L << endl;
-		// cout << U << endl;
-		Vec3 test(1,2,3);
-		return test;
-
-
+		return d;
 	}
+
 	const Vec3 SubstituicaoSucessiva(const Mat3& Mat, const Vec3& bVector) {
-		float m;
-		float x[n];
-		float soma;
+		double m;
+		double yAux[n];
+		double soma;
 		Mat3 M(Mat);
 		Vec3 b(bVector);
 
-		x[0] = b[0]/A(0,0);
+		yAux[0] = b[0]/M(0,0);
+
 		for (int i = 1; i < n; i++) {
 			soma = 0;
 
 			for (int j = 0; j < i; j++) {
-				soma += (A(i,j) * x[j]);
+				soma += (M(i,j) * yAux[j]);
 			}
-			x[i] = (b[i] - soma)/A(i,i);
+
+			yAux[i] = (b[i] - soma)/M(i,i);
 		}
 
+		Vec3 y(yAux[0], yAux[1], yAux[2]);
+		return y;
 	}
 
 	const Vec3 SubstituicaoRetroativa(const Mat3& Mat, const Vec3& bVector) {
 		
-		float m;
-		float x[n];
-		float soma;
+		double m;
+		double x[n];
+		double soma;
+		double p = 0;
 		Mat3 M(Mat);
 		Vec3 b(bVector);
 
-		x[n-1] = b[n-1]/A(n-1,n-1);
+		x[n-1] = b[n-1]/M(n-1,n-1);
 
 		for (int i = n-2; i > 0; i--) {
 			soma = 0;
 
 			for (int j = i+1; j < n; j++) {
-				soma += (A(i,j) * x[j]);
+				soma += (M(i,j) * x[j]);
 			}
-			x[i] = (b[i] - soma)/A(i,i);
+			x[i] = (b[i] - soma)/M(i,i);
 		}
-
 
 
 		Vec3 y(x[0], x[1], x[2]);

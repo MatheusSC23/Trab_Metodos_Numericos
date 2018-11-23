@@ -7,14 +7,14 @@ using namespace std;
 
 int main() {
     Mat3 matrixTest(20,7,9,
-              7,30,8,
-              9,8,30);
+	              7,30,8,
+	              9,8,30);
 
-    Vec3 vecTest(1,2,3);
+    Vec3 vecTest(16,38,38);
 
     Lu test(matrixTest, vecTest, 3);
 
-    test.LuCalculator();
+    cout << test.LuCalculator() << endl;
 
     return 0;
 }
