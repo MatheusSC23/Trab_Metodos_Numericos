@@ -35,69 +35,16 @@ public:
 		length = sizeVector;
 	}
 
-	/* -----------------------------------------------------------------------------------------------------
-                                                     Operadores
-         	                  
-	--------------------------------------------------------------------------------------------------------*/
-
-	double operator [] (int index) const
-	{
+	double operator [] (int index) const {
 		return vec[index];
 	}
 
-	double& operator [] (int index)
-	{
+	double& operator [] (int index) {
 		return vec[index];
 	}
 
 
-	const Vec operator +(const Vec& a) const 
-	{
-		double vector[this->length];
-		for (int i=0; i < this->length; i++){
-			vector[i] = this->vec[i] + a.vec[i];
-		}
-
-		Vec newVector(vector, this->length);
-		return newVector;
-	}
-
-	
-	const Vec operator -(const Vec& a) const 
-	{
-		double vector[this->length];
-		for (int i=0; i < this->length; i++){
-			vector[i] = this->vec[i] - a.vec[i];
-		}
-
-		Vec newVector(vector, this->length);
-		return newVector;
-	}
-
-	const Vec operator *(const Vec& a) const 
-	{
-		double vector[this->length];
-		for (int i=0; i < this->length; i++){
-			vector[i] = this->vec[i] * a.vec[i];
-		}
-
-		Vec newVector(vector, this->length);
-		return newVector;
-	}
-
-	const Vec operator /(const Vec& a) const 
-	{
-		double vector[this->length];
-		for (int i=0; i < this->length; i++){
-			vector[i] = this->vec[i] / a.vec[i];
-		}
-
-		Vec newVector(vector, this->length);
-		return newVector;
-	}
-
-	const Vec& operator=(const Vec& a) 
-	{
+	const Vec& operator=(const Vec& a) {
 		for (int i=0; i < this->length; i++){
 			this->vec[i] = a.vec[i];
 		}
