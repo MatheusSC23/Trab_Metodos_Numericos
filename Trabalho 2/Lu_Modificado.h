@@ -1,5 +1,5 @@
-#ifndef LU_H
-#define LU_H
+#ifndef LU_MODIFICADO_H
+#define LU_MODIFICADO_H
 
 #include <iostream>
 #include <cmath>
@@ -9,14 +9,14 @@
 
 using namespace std;
 
-class Lu {
+class LuModificado {
 	
 public:
 	Mat A;
 	Vec f;
 	int n;
 
-	Lu(const Mat& M, const Vec& b, int size) {
+	LuModificado(const Mat& M, const Vec& b, int size) {
 		A = M;
 		f.vec = b.vec;
 		f.length = b.length;
@@ -24,12 +24,15 @@ public:
 		n = size;
 	}
 
-	const Vec LuCalculate() {
+	const Vec LuModificadoCalculate() {
 		Mat L(this->defineL(), n);
 		Mat U(this->defineU(), n);
+		Mat D(this->defineD(U), n);
+		Mat P(this->defineP(U), n);
 
 		Vec y(this->SubstituicaoSucessiva(L, f), n);
-		Vec d(this->SubstituicaoRetroativa(U, y), n);
+		Vec s(this->SubstituicaoSucessiva(D, y), n);
+		Vec d(this->SubstituicaoRetroativa(P, s), n);
 
 		return d;
 	}
@@ -148,7 +151,47 @@ public:
 		}
 		return A;
 	}
-   
+
+
+	const Mat defineD(const Mat& matrixU){
+
+		double** matrixAux = (double**) malloc(n * sizeof(double*));
+
+	    for (int i = 0; i < n; i++){
+	        matrixAux[i] = (double*) malloc(n * sizeof(double));
+	    }
+
+	    for (int i = 0; i < n; i++){
+	        for (int j = 0; j < n; j++){
+	        	if (i !=j) matrixAux[i][j] = 0;
+	        	if (i==j) matrixAux[i][j] = matrixU(i,i);
+	        }
+	    }
+
+	 		Mat D(matrixAux, n);		
+			return D;
+	}
+	
+	const Mat defineP(const Mat& matrixU){
+
+		double** matrixAux = (double**) malloc(n * sizeof(double*));
+
+	    for (int i = 0; i < n; i++){
+	        matrixAux[i] = (double*) malloc(n * sizeof(double));
+	    }
+
+	    for (int i = 0; i < n; i++){
+	        for (int j = 0; j < n; j++){
+	        	if (i < j) matrixAux[i][j] = matrixU(i,j)/matrixU(i,i);
+	        	if (i == j) matrixAux[i][j] = 1;
+	        	if (i > j) matrixAux[i][j] = 0;
+	        }
+	    }
+
+	 		Mat P(matrixAux, n);		
+			return P;
+	}
+ 
 };
 
 #endif
