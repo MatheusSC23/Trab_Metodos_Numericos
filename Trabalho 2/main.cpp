@@ -1,55 +1,31 @@
 #include <iostream>
 
-//#include "Lu.h"
-//#include "Mat3.h"
-#include "Vec.h"
+#include "Lu.h"
+
 
 using namespace std;
 
 int main() {
-    /*Mat3 matrixTest(20,7,9,
-	              7,30,8,
-	              9,8,30);
+    int n = 3;
 
-    Vec3 vecTest(16,38,38);
-
-    Lu test(matrixTest, vecTest, 3);
-
-    cout << test.LuCalculator() << endl; */
-	int n = 3;
-	double vec1[n] = {7,2,5};
-	double vec2[n] = {1,4,5};
-
-    Vec vector1(vec1, n);
-    Vec vector2(vec2, n);
-   	Vec vector3(vector1, n);
-
-
-	// ================= PRINT VEC 1 =================
-	cout << "[ ";
-    for (int i = 0; i < n; i++) {
-    	//cout << vector1.vec[i] << " ";
+    double vec[n] = {16,38,38};
+    double** mat = (double**) malloc(n * sizeof(double*));
+    for(int i = 0; i < n; i++){
+        mat[i] = (double*) malloc(n * sizeof(double));
     }
-	cout << "]" << endl;
+    mat[0][0] = 20; mat[0][1] = 7; mat[0][2] = 9;
+    mat[1][0] = 7; mat[1][1] = 30; mat[1][2] = 8;
+    mat[2][0] = 9; mat[2][1] = 8; mat[2][2] = 30;
 
-	// ================= PRINT VEC 2 =================
-	cout << "[ ";
-    for (int i = 0; i < n; i++) {
-    	//cout << vector2.vec[i] << " ";
+    Mat matrix(mat, n);
+    Vec vector(vec, n);
+    
+    Lu test(matrix, vector, n);
+    Vec a(test.LuCalculator(), n);
+    for (int i = 0; i < n; ++i)
+    {
+        cout << a[i] << endl;
     }
-	cout << "]" << endl;
-
-	// ================= PRINT VEC 3 =================
-	cout << "[ ";
-    for (int i = 0; i < n; i++) {
-    	cout << vector3.vec[i] << " ";
-    }
-	cout << "]" << endl;
-
-	// ================= PRINT VEC 2.2 =================
-		//cout << vector2.vec[2] << " ";
-
-
     return 0;
 }
 

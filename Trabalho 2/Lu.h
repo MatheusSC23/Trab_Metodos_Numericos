@@ -4,44 +4,44 @@
 #include <iostream>
 #include <cmath>
 
-#include "Mat3.h"
+#include "Mat.h"
+#include "Vec.h"
 
 using namespace std;
 
-class Lu
-{
+class Lu {
 	
-private:
-	Mat3 A;
-	Vec3 d;
-	Vec3 f;
+public:
+	Mat A;
+	Vec f;
 	int n;
 
-public:
-	Lu(const Mat3& M, const Vec3& b, int m) {
+	Lu(const Mat& M, const Vec& b, int size) {
 		A = M;
-		f = b;
-		n = m;
+		f.vec = b.vec;
+		f.length = b.length;
+		// f = b;
+		n = size;
 	}
 
-	// Ly = b; Ux = y
-	const Vec3 LuCalculator() {
-		
-		Mat3 L(this->defineL());
-		Mat3 U(this->defineU());
+	const Vec LuCalculator() {
+		Mat L(this->defineL(), n);
+		Mat U(this->defineU(), n);
 
-		Vec3 y(this->SubstituicaoSucessiva(L, f));
-		Vec3 d(this->SubstituicaoRetroativa(U, y));
+		Vec y(this->SubstituicaoSucessiva(L, f), n);
+		Vec d(this->SubstituicaoRetroativa(U, y), n);
 
 		return d;
 	}
 
-	const Vec3 SubstituicaoSucessiva(const Mat3& Mat, const Vec3& bVector) {
+	const Vec SubstituicaoSucessiva(const Mat& matrix, const Vec& bVector) {
 		double m;
-		double yAux[n];
 		double soma;
-		Mat3 M(Mat);
-		Vec3 b(bVector);
+		double yAux[n];
+		double newVector[this->n];
+
+		Mat M(matrix);
+		Vec b(bVector, this->n);
 
 		yAux[0] = b[0]/M(0,0);
 
@@ -55,39 +55,47 @@ public:
 			yAux[i] = (b[i] - soma)/M(i,i);
 		}
 
-		Vec3 y(yAux[0], yAux[1], yAux[2]);
+		for (int i = 0; i<this->n; i++) {
+			newVector[i] = yAux[i];
+		}
+		Vec y(newVector, this->n);
 		return y;
 	}
 
-	const Vec3 SubstituicaoRetroativa(const Mat3& Mat, const Vec3& bVector) {
+	const Vec SubstituicaoRetroativa(const Mat& matrix, const Vec& bVector) {
 		
 		double m;
 		double x[n];
+		double newVector[this->n];
 		double soma;
 		double p = 0;
-		Mat3 M(Mat);
-		Vec3 b(bVector);
+
+		Mat M(matrix, this->n);
+		Vec b(bVector, this->n);
 
 		x[n-1] = b[n-1]/M(n-1,n-1);
 
-		for (int i = n-2; i > 0; i--) {
+		for (int i = n-2; i >= 0; i--) {
 			soma = 0;
 
 			for (int j = i+1; j < n; j++) {
 				soma += (M(i,j) * x[j]);
 			}
-			x[i] = (b[i] - soma)/M(i,i);
+			x[i] = (b[i] - soma)/ (double)M(i,i);
 		}
 
+		for (int i = 0; i<this->n; i++) {
+			newVector[i] = x[i];
+		}
 
-		Vec3 y(x[0], x[1], x[2]);
+		Vec y(newVector, this->n);
 		return y;
 	}
 	
-	const Mat3 defineL(){
-		float m;
-		float mult[n];
-		float b[n];
+	const Mat defineL(){
+		double m;
+		double mult[n];
+		double b[n];
 		int step = 0;
 		for (int k = 0; k < n - 1; k++) {
 			for (int i = k + 1; i < n; i++) {
@@ -102,16 +110,30 @@ public:
 				b[i] = b[i] + m*b[k];
 			}
 		}
- 		Mat3 L(1,0,0,
- 			  mult[0],1,0,
- 			  mult[1],mult[2],1);
+
+
+	double** matrixAux = (double**) malloc(n * sizeof(double*));
+
+    for (int i = 0; i < n; i++){
+        matrixAux[i] = (double*) malloc(n * sizeof(double));
+    }
+    int k = 0;
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++){
+        	if (i<j) matrixAux[i][j] = 0;
+        	if (i==j) matrixAux[i][j] = 1;
+        	if (i>j) {matrixAux[i][j] = mult[k]; k++;}
+        }
+    }
+
+ 		Mat L(matrixAux, n);
 		
 		return L;
 	}
 
-	const Mat3 defineU(){
-		float m;
-		float b[n];
+	const Mat defineU(){
+		double m;
+		double b[n];
 
 		for (int k = 0; k < n - 1; k++) {
 			for (int i = k + 1; i < n; i++) {

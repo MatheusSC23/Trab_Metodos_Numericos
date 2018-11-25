@@ -2,27 +2,37 @@
 #define VEC_H
 
 #include <iostream>
+#include <cstdlib>
 #include <cmath>
 
 using namespace std;
 
-class Vec
-{
+class Vec {
 	
-private:
 public:
-	int size;
+	int length;
 	double *vec;
 
+	Vec() {
+
+		double newVector[3] = {0,0,0};
+		vec = (double*) malloc(3 * sizeof(double));
+		vec = newVector;
+		length = 3;
+
+	}
 
 	Vec(double* vector, int sizeVector) {
 		vec = vector;
-		size = sizeVector;
+		length = sizeVector;
 	}
 
 	Vec(const Vec& vector, int sizeVector) {
-		size = sizeVector;
-		vec = vector.vec;
+		vec = (double*) malloc(sizeVector * sizeof(double));
+		for (int i=0; i<sizeVector; i++){
+			vec[i] = vector[i];
+		}
+		length = sizeVector;
 	}
 
 	/* -----------------------------------------------------------------------------------------------------
@@ -43,52 +53,52 @@ public:
 
 	const Vec operator +(const Vec& a) const 
 	{
-		double vector[this->size];
-		for (int i=0; i < this->size; i++){
+		double vector[this->length];
+		for (int i=0; i < this->length; i++){
 			vector[i] = this->vec[i] + a.vec[i];
 		}
 
-		Vec newVector(vector, this->size);
+		Vec newVector(vector, this->length);
 		return newVector;
 	}
 
 	
 	const Vec operator -(const Vec& a) const 
 	{
-		double vector[this->size];
-		for (int i=0; i < this->size; i++){
+		double vector[this->length];
+		for (int i=0; i < this->length; i++){
 			vector[i] = this->vec[i] - a.vec[i];
 		}
 
-		Vec newVector(vector, this->size);
+		Vec newVector(vector, this->length);
 		return newVector;
 	}
 
 	const Vec operator *(const Vec& a) const 
 	{
-		double vector[this->size];
-		for (int i=0; i < this->size; i++){
+		double vector[this->length];
+		for (int i=0; i < this->length; i++){
 			vector[i] = this->vec[i] * a.vec[i];
 		}
 
-		Vec newVector(vector, this->size);
+		Vec newVector(vector, this->length);
 		return newVector;
 	}
 
 	const Vec operator /(const Vec& a) const 
 	{
-		double vector[this->size];
-		for (int i=0; i < this->size; i++){
+		double vector[this->length];
+		for (int i=0; i < this->length; i++){
 			vector[i] = this->vec[i] / a.vec[i];
 		}
 
-		Vec newVector(vector, this->size);
+		Vec newVector(vector, this->length);
 		return newVector;
 	}
 
 	const Vec& operator=(const Vec& a) 
 	{
-		for (int i=0; i < this->size; i++){
+		for (int i=0; i < this->length; i++){
 			this->vec[i] = a.vec[i];
 		}
 
