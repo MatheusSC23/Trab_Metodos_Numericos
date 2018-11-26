@@ -12,19 +12,18 @@ class PivotingLU {
         b = _b;
     };
     void calculate(float[]); 
-
-  private:
-    float **A;
     int dim;
-    int *p;
+
+    float **A;
     float *b;
+    void LU();
+    int *p;
 
     void swapRows(int, int);
     // void swapRows(int, int);
     int getPivot(int);
     void retroactiveSubst(float[], float[]);
     void successivesSubst(float[]);
-    void LU();
 };
 
 void PivotingLU::swapRows(int k, int r) {
@@ -62,6 +61,8 @@ void PivotingLU::retroactiveSubst(float y[], float x[]) {
     }
 };
 
+
+
 void PivotingLU::successivesSubst(float y[]) {
     for (int i = 0; i < dim; i++) {
         float sum = 0;
@@ -71,6 +72,10 @@ void PivotingLU::successivesSubst(float y[]) {
         y[i] = b[i] - sum;
     }
 };
+
+
+
+
 
 void PivotingLU::LU() {
     for (int i = 0; i < dim; i++) {
@@ -113,3 +118,4 @@ void PivotingLU::calculate(float x[]) {
     successivesSubst(y);
     retroactiveSubst(y, x);
 };
+
