@@ -5,7 +5,8 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "NumericalMethods/pivoting-LU.h"
+// #include "NumericalMethods/pivoting-LU.h"
+#include "NumericalMethods/pivoting-LUModified.h"
 #include "Terminal Bootstrap/terminal.h"
 
 using namespace std;
@@ -14,6 +15,32 @@ void fillMatrixRow(float **M, string entries[], int m, int i) {
     for (int j = 0; j < m; j++) {
         M[i][j] = (float)strtof((entries[j]).c_str(), 0);
     }
+}
+
+float** allocMatrix(int n, int m) {
+    float **A = new float *[n];
+    for (int i = 0; i < n; i++) {
+        A[i] = new float[m];
+    }
+    return A;
+}   
+
+float** allocMatrix(int n, int m, float B[]) {
+    float **A = new float *[n];
+    for (int i = 0; i < n; i++) {
+        A[i] = new float[m];
+        A[i][0] = B[i];
+    }
+    return A;
+}   
+
+float** allocMatrix(int n, int m, int B[]) {
+    float **A = new float *[n];
+    for (int i = 0; i < n; i++) {
+        A[i] = new float[m];
+        A[i][0] = B[i];
+    }
+    return A;
 }   
 
 int main(void) {
@@ -33,11 +60,7 @@ int main(void) {
     int n;
     Terminal::insertInput("Insira a dimensão da matriz: ", n, "Valor incorreto.");;
 
-    float **A;
-    A = new float *[n];
-    for (int i = 0; i < n; i++) {
-        A[i] = new float[n];
-    }
+    float **A = allocMatrix(n, n);
 
     cout << Terminal::insertSubtitle("Preencha cada linha da matriz, usando ';' para separar os valores") << endl;
 
@@ -68,11 +91,7 @@ int main(void) {
 
     cout << Terminal::insertTitle("INSIRA OS DADOS DO VETOR F") << endl;
 
-    float **B;
-    B = new float *[n];
-    for (int i = 0; i < n; i++) {
-        B[i] = new float[1];
-    }
+    float **B = allocMatrix(n, 1);
 
     for (int i = 0; i < n; i++) {
         int alright = 1;
@@ -101,10 +120,8 @@ int main(void) {
         b[i] = B[i][0];
     }
 
-    float **A_m;
-    A_m = new float *[n];
+    float **A_m = allocMatrix(n, n);
     for (int i = 0; i < n; i++) {
-        A_m[i] = new float[n];
         for (int j = 0; j < n; j++) {
             A_m[i][j] = A[i][j];
         }
@@ -117,23 +134,13 @@ int main(void) {
 
     cout << Terminal::insertSubtitle("Vetor 'd'") << endl;
     
-    float **d;
-    d = new float *[n];
-    for (int i = 0; i < n; i++) {
-        d[i] = new float[1];
-        d[i][0] = x[i];
-    }
+    float **d = allocMatrix(n, 1, x);
 
     cout << Terminal::insertCenteredMatrix(d, n, 1) << endl;
 
     cout << Terminal::insertSubtitle("Vetor 'p' de permutações") << endl;
 
-    float **P;
-    P = new float *[n];
-    for (int i = 0; i < n; i++) {
-        P[i] = new float[1];
-        P[i][0] = p[i];
-    }
+    float **P = allocMatrix(n, 1, p);
 
     cout << Terminal::insertCenteredMatrix(P, n, 1) << endl;
     
@@ -160,28 +167,21 @@ int main(void) {
         b_m[i] = B[i][0];
     }
 
-    PivotingLU calc_m(A_m, p_m, b_m, n);
+    PivotingLUModified calc_m(A_m, p_m, b_m, n);
     calc_m.calculate(x_m);
 
     cout << Terminal::insertCenteredMatrix(A_m, n, n) << endl;
 
     cout << Terminal::insertSubtitle("Vetor 'd'") << endl;
     
-    float **d_m;
-    d_m = new float *[n];
-    for (int i = 0; i < n; i++) {
-        d_m[i] = new float[1];
-        d_m[i][0] = x_m[i];
-    }
+    float **d_m = allocMatrix(n, 1, x_m);
 
     cout << Terminal::insertCenteredMatrix(d_m, n, 1) << endl;
 
     cout << Terminal::insertSubtitle("Vetor 'p' de permutações") << endl;
 
-    float **P_m;
-    P_m = new float *[n];
+    float **P_m = allocMatrix(n, 1);
     for (int i = 0; i < n; i++) {
-        P_m[i] = new float[1];
         P_m[i][0] = p_m[i];
     }
 
@@ -208,10 +208,8 @@ int main(void) {
         9, 4, -5
     };
 
-    float **Adefault;
-    Adefault = new float *[3];
+    float **Adefault = allocMatrix(3, 3);
     for (int i = 0; i < 3; i++) {
-        Adefault[i] = new float[3];
         for (int j = 0; j < 3; j++) {
             Adefault[i][j] = _Adefault[i][j];
         }
@@ -223,12 +221,7 @@ int main(void) {
         11
     };
 
-    float **Bdefault;
-    Bdefault = new float *[3];
-    for (int i = 0; i < 3; i++) {
-        Bdefault[i] = new float[1];
-        Bdefault[i][0] = _Bdefault[i];
-    }
+    float **Bdefault = allocMatrix(3, 1, _Bdefault);
 
     cout << Terminal::insertCenteredMatrix(Adefault, 3, 3) << endl;
     cout << Terminal::insertCenteredMatrix(Bdefault, 3, 1) << endl;
@@ -245,29 +238,19 @@ int main(void) {
 
     cout << Terminal::insertSubtitle("Vetor 'd'") << endl;
 
-    float **B_d;
-    B_d = new float *[3];
-    for (int i = 0; i < 3; i++) {
-        B_d[i] = new float[1];
-        B_d[i][0] = x_d[i];
-    }
+    float **B_d = allocMatrix(3, 1, x_d);
 
     cout << Terminal::insertCenteredMatrix(B_d, 3, 1) << endl;
 
     cout << Terminal::insertSubtitle("Vetor 'p' de permutações") << endl;
 
-    float **P_d;
-    P_d = new float *[3];
-    for (int i = 0; i < 3; i++) {
-        P_d[i] = new float[1];
-        P_d[i][0] = p_d[i];
-    }
+    float **P_d = allocMatrix(3, 1, p_d);
 
     cout << Terminal::insertCenteredMatrix(P_d, 3, 1) << endl;
     
     cout << Terminal::insertSubtitle("CONCLUSÃO: O FOGUETE IRÁ EXPLODIR") << endl;
 
-    Terminal::insertInput("Pressione <Enter> para continuar...");
+    Terminal::insertInput("Pressione <Enter> para sair...");
     Terminal::clear();
 
     return 0;
