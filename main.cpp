@@ -101,6 +101,15 @@ int main(void) {
         b[i] = B[i][0];
     }
 
+    float **A_m;
+    A_m = new float *[n];
+    for (int i = 0; i < n; i++) {
+        A_m[i] = new float[n];
+        for (int j = 0; j < n; j++) {
+            A_m[i][j] = A[i][j];
+        }
+    }
+
     PivotingLU calc(A, p, b, n);
     calc.calculate(x);
 
@@ -127,6 +136,66 @@ int main(void) {
     }
 
     cout << Terminal::insertCenteredMatrix(P, n, 1) << endl;
+    
+    bool willExplode = false;
+    for (int i = 0; i < n; i++) {
+        if (abs(d[i][0]) > 2) {
+            willExplode = true;
+        }
+    }
+
+    string conclusion = willExplode ? "" : "NÃO ";
+    cout << Terminal::insertSubtitle("CONCLUSÃO: O FOGUETE " + conclusion + "IRÁ EXPLODIR") << endl;
+
+    Terminal::insertInput("Pressione <Enter> para continuar...");
+    Terminal::clear();
+
+    cout << Terminal::insertTitle("CÁLCULO COM O MÉTODO LU MODIFICADO") << endl;
+
+    int p_m[n];
+    float x_m[n];
+    float b_m[n];
+
+    for (int i = 0; i < n; i++) {
+        b_m[i] = B[i][0];
+    }
+
+    PivotingLU calc_m(A_m, p_m, b_m, n);
+    calc_m.calculate(x_m);
+
+    cout << Terminal::insertCenteredMatrix(A_m, n, n) << endl;
+
+    cout << Terminal::insertSubtitle("Vetor 'd'") << endl;
+    
+    float **d_m;
+    d_m = new float *[n];
+    for (int i = 0; i < n; i++) {
+        d_m[i] = new float[1];
+        d_m[i][0] = x_m[i];
+    }
+
+    cout << Terminal::insertCenteredMatrix(d_m, n, 1) << endl;
+
+    cout << Terminal::insertSubtitle("Vetor 'p' de permutações") << endl;
+
+    float **P_m;
+    P_m = new float *[n];
+    for (int i = 0; i < n; i++) {
+        P_m[i] = new float[1];
+        P_m[i][0] = p_m[i];
+    }
+
+    cout << Terminal::insertCenteredMatrix(P_m, n, 1) << endl;
+
+    bool willExplode_m = false;
+    for (int i = 0; i < n; i++) {
+        if (abs(d_m[i][0]) > 2) {
+            willExplode_m = true;
+        }
+    }
+
+    string conclusion_m = willExplode_m ? "" : "NÃO ";
+    cout << Terminal::insertSubtitle("CONCLUSÃO: O FOGUETE " + conclusion_m + "IRÁ EXPLODIR") << endl;
 
     Terminal::insertInput("Pressione <Enter> para continuar...");
     Terminal::clear();
@@ -140,13 +209,10 @@ int main(void) {
     };
 
     float **Adefault;
-    Adefault = new float *[n];
-    for (int i = 0; i < n; i++) {
-        Adefault[i] = new float[n];
-    }
-
-    for (int i = 0; i < n; i++) {
-        for (int j = 0; j < n; j++) {
+    Adefault = new float *[3];
+    for (int i = 0; i < 3; i++) {
+        Adefault[i] = new float[3];
+        for (int j = 0; j < 3; j++) {
             Adefault[i][j] = _Adefault[i][j];
         }
     }
@@ -158,8 +224,8 @@ int main(void) {
     };
 
     float **Bdefault;
-    Bdefault = new float *[n];
-    for (int i = 0; i < n; i++) {
+    Bdefault = new float *[3];
+    for (int i = 0; i < 3; i++) {
         Bdefault[i] = new float[1];
         Bdefault[i][0] = _Bdefault[i];
     }
@@ -169,13 +235,8 @@ int main(void) {
 
     int p_d[3];
     float x_d[3];
-    float b_d[3];
 
-    for (int i = 0; i < 3; i++) {
-        b_d[i] = Bdefault[i][0];
-    }
-
-    PivotingLU calc2(Adefault, p_d, b_d, 3);
+    PivotingLU calc2(Adefault, p_d, _Bdefault, 3);
     calc2.calculate(x_d);
 
     cout << Terminal::insertSubtitle("Matriz LU") << endl;
@@ -185,10 +246,10 @@ int main(void) {
     cout << Terminal::insertSubtitle("Vetor 'd'") << endl;
 
     float **B_d;
-    B_d = new float *[n];
-    for (int i = 0; i < n; i++) {
+    B_d = new float *[3];
+    for (int i = 0; i < 3; i++) {
         B_d[i] = new float[1];
-        B_d[i][0] = b_d[i];
+        B_d[i][0] = x_d[i];
     }
 
     cout << Terminal::insertCenteredMatrix(B_d, 3, 1) << endl;
@@ -196,13 +257,15 @@ int main(void) {
     cout << Terminal::insertSubtitle("Vetor 'p' de permutações") << endl;
 
     float **P_d;
-    P_d = new float *[n];
-    for (int i = 0; i < n; i++) {
+    P_d = new float *[3];
+    for (int i = 0; i < 3; i++) {
         P_d[i] = new float[1];
         P_d[i][0] = p_d[i];
     }
 
     cout << Terminal::insertCenteredMatrix(P_d, 3, 1) << endl;
+    
+    cout << Terminal::insertSubtitle("CONCLUSÃO: O FOGUETE IRÁ EXPLODIR") << endl;
 
     Terminal::insertInput("Pressione <Enter> para continuar...");
     Terminal::clear();
