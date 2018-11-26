@@ -151,7 +151,7 @@ string Terminal::insertParagraph(string text, const string wrapper=Terminal::H_S
     int offset = 0;
     for (int i = 0; i < breaks + 1; i++) {
         int start = i * widthMargined + offset;
-        while (text[start] != ' ' && start > 0) start++;
+        while (text[start] != ' ' && start != 0) start++;
         
         offset = 0;
         int end = widthMargined;
@@ -159,15 +159,14 @@ string Terminal::insertParagraph(string text, const string wrapper=Terminal::H_S
             end++;
             offset++;
         }
-        end = end >= textLen ? textLen : end;
-        start = start >= textLen ? textLen : start;
+
         lines[i] = text.substr(start, end);
     }
 
     string result = "";
     for (int i = 0; i < breaks + 1; i++) {
         result += i == 0 ? "" : "\n";
-        result += strutil::wrap(strutil::centerify(lines[i], width - 2), wrapper);
+        result += strutil::wrap(strutil::centerify(lines[i], width - 2), H_SIDE_SGL);
     }
 
     return result;

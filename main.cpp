@@ -45,13 +45,13 @@ float** allocMatrix(int n, int m, int B[]) {
 
 int main(void) {
     Terminal::clear();
-    Terminal::setBoxWidth(90);
+    Terminal::setBoxWidth(70);
     std::setlocale(LC_ALL, "en_US.utf8");
 
     cout << Terminal::insertHeader("ROCKET EXPLOSION DETECTION") << endl;
     cout << Terminal::insertSectionStart() << endl;
     cout << Terminal::insertBlankSpace() << endl;
-    cout << Terminal::insertParagraph("Esse sistema calcula o deslocamento 'd' da extremidade de um foguete espacial através da equação f(d) = ad – dln(d), onde 'd' é o deslocamento medido em 'cm' e 'a' é um parâmetro de ajuste. Com isso, é inferido se o foguete irá explodir ou não.") << endl;
+    cout << Terminal::insertParagraph("Esse sistema foi desenvolvido para verificar a confiabilidade de um foguete. Para isso, é recebida uma matriz 'A' de cofatores e um vetor 'f' de variáveis independentes para que sejamcalculados os descolamentos de peças do foguete. Estes são considerados em módulo após seus cálculos, e caso algum valor seja encontrado acima de 2 o foguete irá explodir.") << endl;
     cout << Terminal::insertBlankSpace() << endl;
     cout << Terminal::insertBottomLine() << endl;
 
