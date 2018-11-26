@@ -12,19 +12,20 @@ using namespace std;
 class LuModificado {
 	
 public:
-	Mat A;
+	Mat B;
 	Vec f;
 	int n;
 
 	LuModificado(const Mat& M, const Vec& b, int size) {
-		A = M;
+		
+		B = M;
 		f.vec = b.vec;
 		f.length = b.length;
-		// f = b;
 		n = size;
 	}
 
 	const Vec LuModificadoCalculate() {
+		
 		Mat L(this->defineL(), n);
 		Mat U(this->defineU(), n);
 		Mat D(this->defineD(U), n);
@@ -33,17 +34,19 @@ public:
 		Vec y(this->SubstituicaoSucessiva(L, f), n);
 		Vec s(this->SubstituicaoSucessiva(D, y), n);
 		Vec d(this->SubstituicaoRetroativa(P, s), n);
+    
 
 		return d;
 	}
 
 	const Vec SubstituicaoSucessiva(const Mat& matrix, const Vec& bVector) {
+		
 		double m;
 		double soma;
 		double yAux[n];
 		double newVector[this->n];
 
-		Mat M(matrix);
+		Mat M(matrix, this->n);
 		Vec b(bVector, this->n);
 
 		yAux[0] = b[0]/M(0,0);
@@ -61,12 +64,15 @@ public:
 		for (int i = 0; i<this->n; i++) {
 			newVector[i] = yAux[i];
 		}
+
 		Vec y(newVector, this->n);
+
 		return y;
 	}
 
 	const Vec SubstituicaoRetroativa(const Mat& matrix, const Vec& bVector) {
-		
+/*	
+    	*/
 		double m;
 		double x[n];
 		double newVector[this->n];
@@ -92,42 +98,45 @@ public:
 		}
 
 		Vec y(newVector, this->n);
+
 		return y;
 	}
 	
 	const Mat defineL(){
+
 		double m;
 		double mult[n];
 		double b[n];
 		int step = 0;
 		for (int k = 0; k < n - 1; k++) {
 			for (int i = k + 1; i < n; i++) {
-				m = (-1) * A(i,k)/A(k,k);
-				mult[step] = A(i,k)/A(k,k);
-				A(i,k) = 0;
-				step++;
+				m = (-1) * B(i,k)/B(k,k);
+				mult[step] = B(i,k)/B(k,k);
+				B(i,k) = 0;
+				step += 1;
 
 				for (int j = k + 1; j < n; j++) {
-					A(i,j) = A(i,j) + m*A(k,j);
+					B(i,j) = B(i,j) + m*B(k,j);
 				}
 				b[i] = b[i] + m*b[k];
 			}
 		}
 
+		double** matrixAux = (double**) malloc(n * sizeof(double*));
 
-	double** matrixAux = (double**) malloc(n * sizeof(double*));
+	    for (int i = 0; i < n; i++){
+	        matrixAux[i] = (double*) malloc(n * sizeof(double));
+	    }
 
-    for (int i = 0; i < n; i++){
-        matrixAux[i] = (double*) malloc(n * sizeof(double));
-    }
-    int k = 0;
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < n; j++){
-        	if (i<j) matrixAux[i][j] = 0;
-        	if (i==j) matrixAux[i][j] = 1;
-        	if (i>j) {matrixAux[i][j] = mult[k]; k++;}
-        }
-    }
+	    int k = 0;
+
+	    for (int i = 0; i < n; i++){
+	        for (int j = 0; j < n; j++){
+	        	if (i<j) matrixAux[i][j] = 0;
+	        	if (i==j) matrixAux[i][j] = 1;
+	        	if (i>j) {matrixAux[i][j] = mult[k]; k+=1;}
+			}
+		}
 
  		Mat L(matrixAux, n);
 		
@@ -135,21 +144,23 @@ public:
 	}
 
 	const Mat defineU(){
+		
 		double m;
 		double b[n];
 
 		for (int k = 0; k < n - 1; k++) {
 			for (int i = k + 1; i < n; i++) {
-				m = (-1) * A(i,k)/A(k,k);
-				A(i,k) = 0;
+				m = (-1) * B(i,k)/B(k,k);
+				B(i,k) = 0;
 
 				for (int j = k + 1; j < n; j++) {
-					A(i,j) = A(i,j) + m*A(k,j);
+					B(i,j) = B(i,j) + m*B(k,j);
 				}
 				b[i] = b[i] + m*b[k];
 			}
 		}
-		return A;
+
+		return B;
 	}
 
 
@@ -168,8 +179,9 @@ public:
 	        }
 	    }
 
-	 		Mat D(matrixAux, n);		
-			return D;
+	 	Mat D(matrixAux, n);	
+
+		return D;
 	}
 	
 	const Mat defineP(const Mat& matrixU){
@@ -188,8 +200,9 @@ public:
 	        }
 	    }
 
-	 		Mat P(matrixAux, n);		
-			return P;
+	 	Mat P(matrixAux, n);		
+		
+		return P;
 	}
  
 };

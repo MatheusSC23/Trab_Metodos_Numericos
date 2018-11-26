@@ -17,17 +17,18 @@ public:
 	int n;
 
 	Lu(const Mat& M, const Vec& b, int size) {
+		
 		A = M;
 		f.vec = b.vec;
 		f.length = b.length;
-		// f = b;
 		n = size;
 	}
 
 	const Vec LuCalculate() {
+
 		Mat L(this->defineL(), n);
 		Mat U(this->defineU(), n);
-
+		
 		Vec y(this->SubstituicaoSucessiva(L, f), n);
 		Vec d(this->SubstituicaoRetroativa(U, y), n);
 
@@ -40,7 +41,7 @@ public:
 		double yAux[n];
 		double newVector[this->n];
 
-		Mat M(matrix);
+		Mat M(matrix, this->n);
 		Vec b(bVector, this->n);
 
 		yAux[0] = b[0]/M(0,0);
@@ -52,13 +53,15 @@ public:
 				soma += (M(i,j) * yAux[j]);
 			}
 
-			yAux[i] = (b[i] - soma)/M(i,i);
+			yAux[i] = (b[i] - soma)/M(i,i);			
 		}
 
 		for (int i = 0; i<this->n; i++) {
 			newVector[i] = yAux[i];
 		}
+
 		Vec y(newVector, this->n);
+
 		return y;
 	}
 
@@ -89,10 +92,12 @@ public:
 		}
 
 		Vec y(newVector, this->n);
+
 		return y;
 	}
 	
 	const Mat defineL(){
+
 		double m;
 		double mult[n];
 		double b[n];
@@ -112,19 +117,19 @@ public:
 		}
 
 
-	double** matrixAux = (double**) malloc(n * sizeof(double*));
+		double** matrixAux = (double**) malloc(n * sizeof(double*));
 
-    for (int i = 0; i < n; i++){
-        matrixAux[i] = (double*) malloc(n * sizeof(double));
-    }
-    int k = 0;
-    for (int i = 0; i < n; i++){
-        for (int j = 0; j < n; j++){
-        	if (i<j) matrixAux[i][j] = 0;
-        	if (i==j) matrixAux[i][j] = 1;
-        	if (i>j) {matrixAux[i][j] = mult[k]; k++;}
-        }
-    }
+	    for (int i = 0; i < n; i++){
+	        matrixAux[i] = (double*) malloc(n * sizeof(double));
+	    }
+	    int k = 0;
+	    for (int i = 0; i < n; i++){
+	        for (int j = 0; j < n; j++){
+	        	if (i<j) matrixAux[i][j] = 0;
+	        	if (i==j) matrixAux[i][j] = 1;
+	        	if (i>j) {matrixAux[i][j] = mult[k]; k++;}
+	        }
+	    }
 
  		Mat L(matrixAux, n);
 		
@@ -146,6 +151,7 @@ public:
 				b[i] = b[i] + m*b[k];
 			}
 		}
+		
 		return A;
 	}
    
